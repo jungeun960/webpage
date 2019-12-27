@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<!--
+	Ion by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html>
+<head>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+            $("#menu").load("menu.html");
+
+        });
+    </script>
+
+    <style>
+        table{
+            border-top: 1px solid #444444;
+            border-collapse: collapse;
+        }
+        tr{
+            border-bottom: 1px solid #444444;
+            padding: 10px;
+        }
+        td{
+            border-bottom: 1px solid #efefef;
+            padding: 10px;
+        }
+        table .even{
+            background: #efefef;
+        }
+        .text{
+            text-align:center;
+            padding-top:20px;
+            color:#000000
+        }
+        .text:hover{
+            text-decoration: underline;
+        }
+        a:link {color : #57A0EE; text-decoration:none;}
+        a:hover { text-decoration : underline;}
+    </style>
+
+    <title>CHOIshop</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
+</head>
+<body id="top">
+
+<!-- Header -->
+<div id="headers"></div>
+<!--</header>-->
+
+<!-- Main -->
+<section id="main" class="wrapper style1">
+    <header class="major">
+        <h2>CHOIshop</h2>
+        <p>www.CHOIshop.com</p>
+    </header>
+    <div class="container">
+        <div class="row">
+
+            <!-- menu -->
+            <div id="menu"></div>
+            <!--</menu>-->
+
+            <h2> Q & A </h2>
+
+            <?php
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from qa_board order by number desc";
+                $result = $connect->query($query);
+            $total = mysqli_num_rows($result);
+
+            ?>
+            <div class="8u skel-cell-important">
+                <table align = center>
+                    <thead align = "center">
+                    <tr>
+                        <td width = "100" align="center">번호</td>
+                        <td width = "500" align = "center">카테고리</td>
+                        <td width = "100" align = "center">작성자</td>
+                        <td width = "300" align = "center">날짜</td>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <?php
+                    while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
+                            if($total%2==0){
+            ?>                      <tr class = "even">
+                        <?php   }
+                            else{
+            ?>                      <tr>
+                        <?php } ?>
+                        <td width = "50" align = "center"><?php echo $total?></td>
+                        <td width = "500" align = "center">
+                            <a href = "qa_read.php?number=<?php echo $rows['number']?>">
+                                <?php echo $rows['category']?>
+                        </td>
+                        <td width = "100" align = "center"><?php echo $rows['id']?></td>
+                        <td width = "200" align = "center"><?php echo $rows['date']?></td>
+                    </tr>
+                    <?php
+                    $total--;
+                    }
+            ?>
+                    </tbody>
+                </table>
+
+                <div class = text>
+                    <font style="cursor: hand"onClick="location.href='./qa_write.html'">글쓰기</font>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- Footer -->
+<div id="footers"></div>
+<!--</footer>-->
+
+</body>
+</html>
