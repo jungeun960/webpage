@@ -10,6 +10,8 @@
 
         .js #fouc {display: none}
 
+        a:link {color : #57A0EE; text-decoration:none;}
+
         table {
             width: 100%;
             border: 1px solid #444444;

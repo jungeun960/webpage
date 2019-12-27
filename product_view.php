@@ -204,8 +204,7 @@
                 $conn = mysqli_connect("localhost","root","sql","data2019");
                 $number = $_GET['number'];
 
-
-                $query = "select category, content, date, id from qa_board where number =$number";
+                $query = "select category, name, price, content, photo from product_board where number =$number";
                 $result = $conn->query($query);
                 $rows = mysqli_fetch_assoc($result);
                 ?>
@@ -217,15 +216,18 @@
                             <td colspan="4" class="view_title"><?php echo $rows['category']?></td>
                         </tr>
                         <tr>
-                            <td class="view_id">작성자</td>
-                            <td class="view_id2"><?php echo $rows['id']?></td>
+                            <td class="view_id">상품명</td>
+                            <td class="view_id2"><?php echo $rows['name']?></td>
                         </tr>
-
 
                         <tr>
-                            <td colspan="4" class="view_content" valign="top">
-                                <?php echo $rows['content']?></td>
+                            <td class="view_id">가격</td>
+                            <td class="view_id2"><?php echo $rows['price']?></td>
                         </tr>
+
+
+                        <img src="/uploads/<?php echo $rows['photo']; ?>" align = "center" alt="" />
+
                     </table>
 
 
@@ -251,11 +253,11 @@
     <div id="footers"></div>
     <!--</footer>-->
 
-    </div> <!-- /#fouc -->
+</div> <!-- /#fouc -->
 
-    <script>
-        document.getElementById("fouc").style.display="block";
-    </script>
+<script>
+    document.getElementById("fouc").style.display="block";
+</script>
 
 </body>
 </html>

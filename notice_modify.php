@@ -9,22 +9,8 @@
 
     <style>
         .js #fouc {display: none}
-    </style>
-    <script>
-        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
-    </script>
 
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready( function() {
-
-            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
-            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
-            $("#menu").load("menu.html");
-
-        });
-    </script>
-    <style>
+        a:link {color : #57A0EE; text-decoration:none;}
         table.table2{
             border-collapse: separate;
             border-spacing: 1px;
@@ -47,7 +33,20 @@
         }
 
     </style>
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
 
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+            $("#menu").load("menu.html");
+
+        });
+    </script>
 
     <title>CHOIshop</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />

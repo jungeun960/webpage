@@ -27,6 +27,13 @@
                         <li><a href="notice.html">NOTICE </a></li>
                         <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
 <!--                        <button onclick="location.href='./logout.php'">로그아웃</button>-->
+            <?php
+                if($_SESSION['id']=='admin') {
+                ?>
+                    <li><a href="add.html">상품등록 &nbsp &nbsp</a></li>
+            <?php
+                }
+                ?>
             <br/>
             <?php
                 }

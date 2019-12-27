@@ -4,44 +4,14 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<html>
 <html class="no-js">
-<head>
-    <style>
-        .js #fouc {display: none}
-
-        a:link {color : #57A0EE; text-decoration:none;}
-    </style>
-    <script>
-        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
-    </script>
-
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready( function() {
-
-            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
-            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
-            $("#menu").load("menu.html");
-
-        });
-    </script>
-
-    <title>CHOIshop</title>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
-    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
-    <script src="js/jquery.min.js"></script>
-    <script src="js/skel.min.js"></script>
-    <script src="js/skel-layers.min.js"></script>
-    <script src="js/init.js"></script>
-    <noscript>
-        <link rel="stylesheet" href="css/skel.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/style-xlarge.css" />
-    </noscript>
-</head>
 <style>
+
+    .js #fouc {display: none}
+
+    a:link {color : #57A0EE; text-decoration:none;}
+
     table.table2{
         border-collapse: separate;
         border-spacing: 1px;
@@ -59,14 +29,45 @@
     }
     table.table2 td {
         padding: 10px;
-        vertical-align: top;
+        vertical-align: middle;
         border-bottom: 1px solid #ccc;
     }
 
 </style>
+
+<script>
+    (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+</script>
+
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript">
+    $(document).ready( function() {
+
+        $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+        $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+        $("#menu").load("menu.html");
+
+    });
+</script>
+
+<title>CHOIshop</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+<script src="js/jquery.min.js"></script>
+<script src="js/skel.min.js"></script>
+<script src="js/skel-layers.min.js"></script>
+<script src="js/init.js"></script>
+<noscript>
+    <link rel="stylesheet" href="css/skel.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/style-xlarge.css" />
+</noscript>
+</head>
+
 <body id="top">
 <div id="fouc">
-
     <!-- Header -->
     <div id="headers"></div>
     <!--</header>-->
@@ -124,36 +125,59 @@
                 <!--</menu>-->
 
 
-
-
-                <h2> 공지사항 작성하기 </h2>
+                <h2> 상품 등록하기 </h2>
                 <div class="8u skel-cell-important">
-                    <form method = "post" action = "notice_write_action.php">
+                    <form method = "post" action = "product_write_action.php" enctype="multipart/form-data">
                         <table  style="padding-top:50px" align = center border=0 cellpadding=2 >
 
                             <tr>
                                 <td bgcolor=white>
                                     <table class = "table2">
                                         <tr>
-                                            <td>작성자</td>
+                                            <td>카테고리</td>
+                                            <td>
+                                                <!--                                            <input type = text name =title size=60>-->
+                                                <select id="browsers" name="category" size="1" required autofocus>
+                                                    <option value="TOP" selected>TOP</option>
+                                                    <option value="OUTER">OUTER</option>
+                                                    <option value="PANTS">PANTS</option>
+                                                    <option value="DRESS" >DRESS</option>
+                                                    <option value="SKIRT" >SKIRT</option>
+                                                </select>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>제품 이름</td>
                                             <td><input type = text name =name size=20> </td>
                                         </tr>
 
                                         <tr>
-                                            <td>제목</td>
-                                            <td><input type = text name =title size=60></td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>내용</td>
-                                            <td><textarea name =content cols=85 rows=15 wrap="hard"></textarea></td>
+                                            <td>판매가</td>
+                                            <td><input type = text name =price size=20> </td>
 
                                         </tr>
 
                                         <tr>
-                                            <td>Password</td>
-                                            <td><input type = password name =pw size=10 maxlength=10></td>
+                                            <td>코멘트</td>
+                                            <td><textarea name =content cols=85 rows=4 wrap="hard"></textarea></td>
+
                                         </tr>
+
+
+                                        <tr>
+                                            <td> 대표사진 &nbsp &nbsp </td>
+                                            <td>
+                                                <input type='file' name='myfile'>
+<!--                                            <form action="./file_upload.php" enctype="multipart/form-data" method='post'>-->
+<!--                                                -->
+<!--                                                <button>보내기</button>-->
+<!--                                            </form>-->
+                                            </td>
+
+                                        </tr>
+
+
                                     </table>
 
                                     <center>
@@ -173,6 +197,7 @@
     <!-- Footer -->
     <div id="footers"></div>
     <!--</footer>-->
+
 </div> <!-- /#fouc -->
 
 <script>
