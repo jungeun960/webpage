@@ -4,8 +4,14 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-<html>
+<html class="no-js">
 <head>
+    <style>
+        .js #fouc {display: none}
+    </style>
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
     <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="/js/jquery-ui.js"></script>
@@ -38,87 +44,121 @@
     </noscript>
 </head>
 <body id="top">
+<div id="fouc">
 
-<!-- Header -->
-<div id="headers"></div>
-<!--</header>-->
+    <!-- Header -->
+    <div id="headers"></div>
+    <!--</header>-->
 
-<!-- Main -->
-<section id="main" class="wrapper style1">
-    <header class="major">
-        <h2>CHOIshop</h2>
-        <p>www.CHOIshop.com</p>
-    </header>
-    <div class="container">
-        <div class="row">
+    <!-- Main -->
+    <section id="main" class="wrapper style1">
+        <header class="major">
+            <h2>CHOIshop</h2>
+            <p>www.CHOIshop.com</p>
+        </header>
+        <div class="container">
+            <div class="row">
 
-            <!-- menu -->
-            <div id="menu"></div>
-            <!--</menu>-->
-
-
-            <div class="8u skel-cell-important">
-                <form action="" method="post">
-                    <table  style="padding-top:50px" align = center border=0 cellpadding=2 >
-                            <td bgcolor=white>
-                                <table class = "table2">
-
-                                            <br> <br> <br> <br> <br>
-                                            이 글은 비밀글 입니다. 비밀번호를 입력하여 주세요.<br>
-                                            관리자는 확인 버튼만 누르시면 됩니다.<br>
-                                                <td>Password</td>
-                                                <td><input type="password" name="pw_chk" size="20px"></td>
-
-                                                <br>
+                <!-- menu -->
+                <div>
+                    <section>
+                        <h3>C A T E G O R Y</h3>
+                        <ul class="alt">
+                            <li><a href="">NEW</a></li>
+                            <li><a href="">BEST50</a></li>
+                            <li><a href="top.html">TOP</a></li>
+                            <li><a href="">OUTER</a></li>
+                            <li><a href="">PANTS</a></li>
+                            <li><a href="">DRESS</a></li>
+                            <li><a href="">SKIRT</a></li>
 
 
+                        </ul>
+                        <!--        <ul class="actions">-->
+                        <!--            <li><a href="" class="button alt">Learn More</a></li>-->
+                        <!--        </ul>-->
+                    </section>
+                    <hr />
+                    <section>
+                        <h3>C O M M U N I T Y</h3>
+                        <ul class="alt">
+                            <li><a href="notice.html">NOTICE</a></li>
+                            <li><a href="q_and_a.html">Q&A</a></li>
+                            <li><a href="">REVIEW</a></li>
 
-                                </table>
-                                <input type="submit" value="확인" style="text-align: right"/>
-                            </td>
 
-                    </table>
+                        </ul>
+                    </section>
+                </div>
+                <!--</menu>-->
 
-                </form>
+
+                <div class="8u skel-cell-important">
+                    <form action="" method="post">
+                        <table  style="padding-top:50px" align = center border=0 cellpadding=2 >
+                                <td bgcolor=white>
+                                    <table class = "table2">
+
+                                                <br> <br> <br> <br> <br>
+                                                이 글은 비밀글 입니다. 비밀번호를 입력하여 주세요.<br>
+                                                관리자는 확인 버튼만 누르시면 됩니다.<br>
+                                                    <td>Password</td>
+                                                    <td><input type="password" name="pw_chk" size="20px"></td>
+
+                                                    <br>
+
+
+
+                                    </table>
+                                    <input type="submit" value="확인" style="text-align: right"/>
+                                </td>
+
+                        </table>
+
+                    </form>
+                </div>
+
+
+                <?php
+                    //    include $_SERVER['DOCUMENT_ROOT']."/db.php"; /* db load */
+                    $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                    $number = $_GET['number']; /* bno함수에 idx값을 받아와 넣음*/
+
+
+                    $query = "select category, content, date, id, password, number from qa_board where number =$number";
+                    //$query = "select * from qa_board where number= $number";
+                    $result = $connect->query($query);
+                    $rows = mysqli_fetch_assoc($result);
+
+                    //    $board = $sql->fetch_array();
+
+                    $bpw = $rows['password'];
+
+                    if(isset($_POST['pw_chk'])) //만약 pw_chk POST값이 있다면
+                    {
+                        $pwk = $_POST['pw_chk']; // $pwk변수에 POST값으로 받은 pw_chk를 넣습니다.
+                        if($pwk == $bpw) //다시 if문으로 DB의 pw와 입력하여 받아온 bpw와 값이 같은지 비교를 하고
+                        {
+                            ?>
+                            <script type="text/javascript">location.replace("qa_view.php?number=<?php echo $rows['number']?>");</script><!-- pwk와 bpw값이 같으면 read.php로 보내고 -->
+                        <?php
+                        }else{ ?>
+                            <script type="text/javascript">alert('비밀번호가 틀립니다');</script><!--- 아니면 비밀번호가 틀리다는 메시지를 보여줍니다 -->
+                        <?php } } ?>
+
+
             </div>
 
-
-            <?php
-                //    include $_SERVER['DOCUMENT_ROOT']."/db.php"; /* db load */
-                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
-                $number = $_GET['number']; /* bno함수에 idx값을 받아와 넣음*/
-
-
-                $query = "select category, content, date, id, password, number from qa_board where number =$number";
-                //$query = "select * from qa_board where number= $number";
-                $result = $connect->query($query);
-                $rows = mysqli_fetch_assoc($result);
-
-                //    $board = $sql->fetch_array();
-
-                $bpw = $rows['password'];
-
-                if(isset($_POST['pw_chk'])) //만약 pw_chk POST값이 있다면
-                {
-                    $pwk = $_POST['pw_chk']; // $pwk변수에 POST값으로 받은 pw_chk를 넣습니다.
-                    if($pwk == $bpw) //다시 if문으로 DB의 pw와 입력하여 받아온 bpw와 값이 같은지 비교를 하고
-                    {
-                        ?>
-                        <script type="text/javascript">location.replace("qa_view.php?number=<?php echo $rows['number']?>");</script><!-- pwk와 bpw값이 같으면 read.php로 보내고 -->
-                    <?php
-                    }else{ ?>
-                        <script type="text/javascript">alert('비밀번호가 틀립니다');</script><!--- 아니면 비밀번호가 틀리다는 메시지를 보여줍니다 -->
-                    <?php } } ?>
-
-
         </div>
+    </section>
 
-    </div>
-</section>
+    <!-- Footer -->
+    <div id="footers"></div>
+    <!--</footer>-->
+    </div> <!-- /#fouc -->
 
-<!-- Footer -->
-<div id="footers"></div>
-<!--</footer>-->
-
+    <script>
+        document.getElementById("fouc").style.display="block";
+    </script>
 </body>
 </html>

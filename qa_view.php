@@ -4,9 +4,11 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-<html>
+<html class="no-js">
 <head>
     <style>
+        .js #fouc {display: none}
+
         table {
             width: 100%;
             border: 1px solid #444444;
@@ -114,8 +116,11 @@
         }
 
 
-
     </style>
+
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
@@ -144,75 +149,111 @@
     </noscript>
 </head>
 <body id="top">
+<div id="fouc">
 
-<!-- Header -->
-<div id="headers"></div>
-<!--</header>-->
+    <!-- Header -->
+    <div id="headers"></div>
+    <!--</header>-->
 
-<!-- Main -->
-<section id="main" class="wrapper style1">
-    <header class="major">
-        <h2>CHOIshop</h2>
-        <p>www.CHOIshop.com</p>
-    </header>
-    <div class="container">
-        <div class="row">
+    <!-- Main -->
+    <section id="main" class="wrapper style1">
+        <header class="major">
+            <h2>CHOIshop</h2>
+            <p>www.CHOIshop.com</p>
+        </header>
+        <div class="container">
+            <div class="row">
 
-            <!-- menu -->
-            <div id="menu"></div>
-            <!--</menu>-->
-
-
-            <?php
-            $conn = mysqli_connect("localhost","root","sql","data2019");
-            $number = $_GET['number'];
-
-
-            $query = "select category, content, date, id from qa_board where number =$number";
-            $result = $conn->query($query);
-            $rows = mysqli_fetch_assoc($result);
-            ?>
-
-
-            <div class="8u skel-cell-important">
-                <table class="view_table" align=center>
-                    <tr>
-                        <td colspan="4" class="view_title"><?php echo $rows['category']?></td>
-                    </tr>
-                    <tr>
-                        <td class="view_id">작성자</td>
-                        <td class="view_id2"><?php echo $rows['id']?></td>
-                    </tr>
+                <!-- menu -->
+                <div>
+                    <section>
+                        <h3>C A T E G O R Y</h3>
+                        <ul class="alt">
+                            <li><a href="">NEW</a></li>
+                            <li><a href="">BEST50</a></li>
+                            <li><a href="top.html">TOP</a></li>
+                            <li><a href="">OUTER</a></li>
+                            <li><a href="">PANTS</a></li>
+                            <li><a href="">DRESS</a></li>
+                            <li><a href="">SKIRT</a></li>
 
 
-                    <tr>
-                        <td colspan="4" class="view_content" valign="top">
-                            <?php echo $rows['content']?></td>
-                    </tr>
-                </table>
+                        </ul>
+                        <!--        <ul class="actions">-->
+                        <!--            <li><a href="" class="button alt">Learn More</a></li>-->
+                        <!--        </ul>-->
+                    </section>
+                    <hr />
+                    <section>
+                        <h3>C O M M U N I T Y</h3>
+                        <ul class="alt">
+                            <li><a href="notice.html">NOTICE</a></li>
+                            <li><a href="q_and_a.html">Q&A</a></li>
+                            <li><a href="">REVIEW</a></li>
 
 
-                <!-- MODIFY & DELETE -->
-                <div class="view_btn">
-                    <div id="btn_group">
-                        <button  onclick="location.href='./q_and_a.html'">목록으로</button>
-                        <button  onclick="location.href='./notice_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
-                        <button  onclick="location.href='./notice_delete.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">삭제</button>
-                    </div>
+                        </ul>
+                    </section>
                 </div>
+                <!--</menu>-->
 
 
+                <?php
+                $conn = mysqli_connect("localhost","root","sql","data2019");
+                $number = $_GET['number'];
+
+
+                $query = "select category, content, date, id from qa_board where number =$number";
+                $result = $conn->query($query);
+                $rows = mysqli_fetch_assoc($result);
+                ?>
+
+
+                <div class="8u skel-cell-important">
+                    <table class="view_table" align=center>
+                        <tr>
+                            <td colspan="4" class="view_title"><?php echo $rows['category']?></td>
+                        </tr>
+                        <tr>
+                            <td class="view_id">작성자</td>
+                            <td class="view_id2"><?php echo $rows['id']?></td>
+                        </tr>
+
+
+                        <tr>
+                            <td colspan="4" class="view_content" valign="top">
+                                <?php echo $rows['content']?></td>
+                        </tr>
+                    </table>
+
+
+                    <!-- MODIFY & DELETE -->
+                    <div class="view_btn">
+                        <div id="btn_group">
+                            <button  onclick="location.href='./q_and_a.html'">목록으로</button>
+                            <button  onclick="location.href='./notice_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
+                            <button  onclick="location.href='./notice_delete.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">삭제</button>
+                        </div>
+                    </div>
+
+
+
+                </div>
 
             </div>
 
         </div>
+    </section>
 
-    </div>
-</section>
+    <!-- Footer -->
+    <div id="footers"></div>
+    <!--</footer>-->
 
-<!-- Footer -->
-<div id="footers"></div>
-<!--</footer>-->
+    </div> <!-- /#fouc -->
+
+    <script>
+        document.getElementById("fouc").style.display="block";
+    </script>
 
 </body>
 </html>

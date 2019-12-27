@@ -4,9 +4,11 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-<html>
+<html  class="no-js">
 <head>
     <style>
+        .js #fouc {display: none}
+
         table{
             border-top: 1px solid #444444;
             border-collapse: collapse;
@@ -33,6 +35,10 @@
         a:link {color : #57A0EE; text-decoration:none;}
         a:hover { text-decoration : underline;}
     </style>
+
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
@@ -61,6 +67,7 @@
     </noscript>
 </head>
 <body id="top">
+<div id="fouc">
 
 <!-- Header -->
 <div id="headers"></div>
@@ -76,7 +83,36 @@
         <div class="row">
 
             <!-- menu -->
-            <div id="menu"></div>
+            <div>
+                <section>
+                    <h3>C A T E G O R Y</h3>
+                    <ul class="alt">
+                        <li><a href="">NEW</a></li>
+                        <li><a href="">BEST50</a></li>
+                        <li><a href="top.html">TOP</a></li>
+                        <li><a href="">OUTER</a></li>
+                        <li><a href="">PANTS</a></li>
+                        <li><a href="">DRESS</a></li>
+                        <li><a href="">SKIRT</a></li>
+
+
+                    </ul>
+                    <!--        <ul class="actions">-->
+                    <!--            <li><a href="" class="button alt">Learn More</a></li>-->
+                    <!--        </ul>-->
+                </section>
+                <hr />
+                <section>
+                    <h3>C O M M U N I T Y</h3>
+                    <ul class="alt">
+                        <li><a href="notice.html">NOTICE</a></li>
+                        <li><a href="q_and_a.html">Q&A</a></li>
+                        <li><a href="">REVIEW</a></li>
+
+
+                    </ul>
+                </section>
+            </div>
             <!--</menu>-->
 
              <h2> NOTICE </h2>
@@ -138,6 +174,12 @@
 <!-- Footer -->
 <div id="footers"></div>
 <!--</footer>-->
+
+</div> <!-- /#fouc -->
+
+<script>
+    document.getElementById("fouc").style.display="block";
+</script>
 
 </body>
 </html>
