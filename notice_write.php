@@ -93,13 +93,13 @@
                     <section>
                         <h3>C A T E G O R Y</h3>
                         <ul class="alt">
-                            <li><a href="">NEW</a></li>
-                            <li><a href="">BEST50</a></li>
+                            <li><a href="new.html">NEW</a></li>
+                            <li><a href="best.html">BEST50</a></li>
                             <li><a href="top.html">TOP</a></li>
-                            <li><a href="">OUTER</a></li>
-                            <li><a href="">PANTS</a></li>
-                            <li><a href="">DRESS</a></li>
-                            <li><a href="">SKIRT</a></li>
+                            <li><a href="outer.html">OUTER</a></li>
+                            <li><a href="pants.html">PANTS</a></li>
+                            <li><a href="dress.html">DRESS</a></li>
+                            <li><a href="skirt.html">SKIRT</a></li>
 
 
                         </ul>
@@ -113,7 +113,7 @@
                         <ul class="alt">
                             <li><a href="notice.html">NOTICE</a></li>
                             <li><a href="q_and_a.html">Q&A</a></li>
-                            <li><a href="">REVIEW</a></li>
+                            <li><a href="review.html">REVIEW</a></li>
 
 
                         </ul>
