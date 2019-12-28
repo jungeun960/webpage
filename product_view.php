@@ -117,6 +117,34 @@
             background-color: lightslategrey;
         }
 
+        div#side_left{
+            width:490px;
+            height:490px;
+            float:left;
+            margin:5px;
+        }
+        #side_left_box{
+            width:95%;
+            height:45%;
+
+            float:left;
+            margin:5px;
+        }
+        #mid_content{
+            width:400px;
+            height:400px;
+
+            float:left;
+            margin:15px;
+        }
+        #side_content_box{
+            display: inline;
+            background-color:white;
+            margin:15px;
+        }
+
+
+
 
     </style>
 
@@ -210,26 +238,29 @@
                 ?>
 
 
-                <div class="8u skel-cell-important">
-                    <table class="view_table" align=center>
-                        <tr>
-                            <td colspan="4" class="view_title"><?php echo $rows['category']?></td>
-                        </tr>
-                        <tr>
-                            <td class="view_id">상품명</td>
-                            <td class="view_id2"><?php echo $rows['name']?></td>
-                        </tr>
+                <div>
+                    <div id = "side_left">
+                        <img src="/uploads/<?php echo $rows['photo']; ?>" align = "center" alt="" width="490" height="490"/>
 
-                        <tr>
-                            <td class="view_id">가격</td>
-                            <td class="view_id2"><?php echo $rows['price']?></td>
-                        </tr>
+                    </div>
+                    <div id = "mid_content">
+                        <?php echo $rows['name']?>
+                        <br>
+                        <br>
+                        <div id = "side_content_box">가격 &nbsp &nbsp &nbsp &nbsp</div>
+                        <div id = "side_content_box"><?php echo $rows['price']?> </div>
 
+                        <br><br>
+<!--                        <div id = "side_content_box">코멘트  &nbsp &nbsp</div>-->
+                        <div id = "side_content_box"><?php echo $rows['content']?></div>
 
-                        <img src="/uploads/<?php echo $rows['photo']; ?>" align = "center" alt="" />
+                        <br><br><br>
+                        <input type = "button" value="BUY" width="300">
+                        <input type = "button" value="CART" width="300">
 
+                    </div>
+                    <table >
                     </table>
-
 
                     <!-- MODIFY & DELETE -->
                     <div class="view_btn">
