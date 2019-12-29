@@ -45,15 +45,7 @@
             border: 1px solid #444444;
             margin-left: 20px;
         }
-        .view_hit {
-            background-color: white;
-            width: 30px;
-            text-align: center;
-        }
-        .view_hit2 {
-            background-color: white;
-            width: 60px;
-        }
+
         .view_content {
             padding: 20px;
             height: 500px;
@@ -67,44 +59,7 @@
             margin: auto;
             margin-top: 50px;
         }
-        .view_btn1 {
-            height: 50px;
-            width: 100px;
-            font-size: 20px;
-            text-align: center;
-            background-color: white;
-            border: 2px solid black;
-            border-radius: 10px;
-        }
-        .view_comment_input {
-            width: 700px;
-            height: 500px;
-            text-align: center;
-            margin: auto;
-        }
-        .view_text3 {
-            font-weight: bold;
-            float: left;
-            margin-left: 20px;
-        }
-        .view_com_id {
-            width: 100px;
-        }
-        .view_comment {
-            width: 500px;
-        }
 
-        #test_btn1{
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            margin-right:-4px;
-        }
-
-        #test_btn2{
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-            margin-left:-3px;
-        }
 
         #btn_group button{
             border: 1px solid snow;
@@ -118,11 +73,115 @@
         }
 
 
+        html, body {
+            background-color: #f0f2fa;
+            color: #555f77;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        input, textarea {
+            outline: none;
+            border: none;
+            display: block;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            font-size: 16px;
+            color: #555f77;
+
+        }
+
+        p {
+            line-height: 21px;
+        }
+
+        .comments {
+            margin: -150px auto 0;
+            max-width: 972px;
+            padding: 0 20px;
+        }
+
+        .comment-wrap {
+            margin-bottom: 20px;
+            display: table;
+            width: 100%;
+            min-height: 85px;
+        }
+
+        .photo {
+        //background-color: #ff6666;
+            padding-top: 10px;
+            display: table-cell;
+            width: 56px;
+
+        .avatar {
+        @include size(rem(36));
+        //background-color: #0094ff;
+            border-radius: 50%;
+            background-size: contain;
+        }
+        }
+
+        .comment-block {
+            padding: 16px;
+            background-color: #fff;
+            display: table-cell;
+            vertical-align: top;
+            border-radius: 3px;
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,0.08);
+
+        textarea {
+            width: 100%;
+            resize: none;
+        }
+        }
+
+        .comment-text {
+            margin-bottom: 20px;
+        }
+
+        .bottom-comment {
+            color: #acb4c2;
+            font-size: 14px;
+        }
+
+        .comment-date {
+            float: left;
+        }
+
+        .comment-actions {
+            float: right;
+
+        li {
+            display: inline;
+            margin: -2px;
+            cursor: pointer;
+
+        .complain {
+             padding-right: 12px;
+             border-right: 1px solid #e1e5eb;
+         }
+
+        .reply {
+             padding-left: 12px;
+             padding-right: 2px;
+         }
+
+        :hover {
+             color: #0095ff;
+         //text-decoration: underline;
+         }
+        }
+        }
+
+
     </style>
 
     <script>
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
     </script>
+
+    <script type="text/javascript" src="/js/common.js"></script>
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
@@ -212,6 +271,7 @@
 
 
                 <div class="8u skel-cell-important">
+                    <!-- 글 불러오기 -->
                     <table class="view_table" align=center>
                         <tr>
                             <td colspan="4" class="view_title"><?php echo $rows['category']?></td>
@@ -238,12 +298,68 @@
                         </div>
                     </div>
 
+                    <div class="comments">
+                        <div class="comment-wrap">
+                            <div class="photo">
+                                <img src="images/shop.PNG" align = "center" width="100" height="100" alt="" />
+                            </div>
+                            <div class="comment-block">
+                                <form action="qa_comment.php" method="post">
+                                    <input type="hidden" name="bno" value="<?php echo $number?>">
+                                    <textarea name="content" id="content" cols="30" rows="3" placeholder="Add comment..."></textarea>
+
+                                    <div style="float: right; margin: 10px">
+                                        <input type = "submit" value="작성">
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <?php
+                            $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                            $query1 ="select * from reply where con_num = $number order by con_num desc";
+                            $result1 = $connect->query($query1);
+                            $total1 = mysqli_num_rows($result1);
+
+//                             var_export($total1);
+
+                        ?>
+
+                        <?php
+                        while($rows1 = mysqli_fetch_assoc($result1)){ //DB에 저장된 데이터 수 (열 기준)
+                            if($total1%2==0){
+                                ?>
+                            <?php   }
+                            else{
+                                ?>
+                            <?php } ?>
+                            <div class="comment-wrap">
+                                <div class="photo">
+                                    <img src="images/shop.PNG" align = "center" width="100" height="100" alt="" />
+                                </div>
+                                <div class="comment-block">
+                                    <p class="comment-text"><?php echo $rows1['content']?></p>
+                                    <div class="bottom-comment">
+                                        <div class="comment-date"><?php echo $rows1['date']?></div>
+                                        <ul class="comment-actions">
+                                            <li class="reply"><a href="">수정</a> </li>
+                                            <li class="reply"><a href="./qa_delete.php?idx=<?=$rows1['idx']?>&con_num=<?=$rows1['con_num']?>">삭제</a> </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                            $total1--;
+                        }
+                        ?>
 
 
+
+                    </div>
                 </div>
-
+                </div>
             </div>
-
         </div>
     </section>
 
