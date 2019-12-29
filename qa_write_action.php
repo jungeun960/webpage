@@ -1,8 +1,9 @@
 <?php
-    header("Content-Type: text/html;charset=UTF-8");
+session_start();
+header("Content-Type: text/html;charset=UTF-8");
     $conn = mysqli_connect("localhost","root","sql","data2019");
 
-    $id = $_POST['name'];                      //Writer
+    $id = $_SESSION['id'];                      //Writer
     $pw = $_POST['pw'];                        //Password
     $category = $_POST['category'];            //category
     $content = $_POST['content'];               //Content

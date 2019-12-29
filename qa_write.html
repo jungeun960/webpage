@@ -4,6 +4,7 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php session_start(); ?>
 <html>
 <html class="no-js">
     <style>
@@ -150,7 +151,8 @@
 
                                         <tr>
                                             <td>작성자</td>
-                                            <td><input type = text name =name size=20> </td>
+                                            <!--                                            세션에서 현재 작성자 불러옴-->
+                                            <td> <?php echo $_SESSION['id']?> </td>
                                         </tr>
 
                                         <tr>

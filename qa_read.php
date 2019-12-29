@@ -4,6 +4,8 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php session_start(); ?>
+
 <html class="no-js">
 <head>
     <style>
@@ -103,7 +105,7 @@
 
                                                 <br> <br> <br> <br> <br>
                                                 이 글은 비밀글 입니다. 비밀번호를 입력하여 주세요.<br>
-                                                관리자는 확인 버튼만 누르시면 됩니다.<br>
+<!--                                                관리자는 확인 버튼만 누르시면 됩니다.<br>-->
                                                     <td>Password</td>
                                                     <td><input type="password" name="pw_chk" size="20px"></td>
 
@@ -136,17 +138,25 @@
 
                     $bpw = $rows['password'];
 
-                    if(isset($_POST['pw_chk'])) //만약 pw_chk POST값이 있다면
-                    {
-                        $pwk = $_POST['pw_chk']; // $pwk변수에 POST값으로 받은 pw_chk를 넣습니다.
-                        if($pwk == $bpw) //다시 if문으로 DB의 pw와 입력하여 받아온 bpw와 값이 같은지 비교를 하고
+                    if($_SESSION['id']=='admin') {
+                    ?>
+                        <script type="text/javascript">location.replace("qa_view.php?number=<?php echo $rows['number']?>");</script><!-- pwk와 bpw값이 같으면 read.php로 보내고 -->
+                    <?php
+                    }else{
+
+                        if(isset($_POST['pw_chk'])) //만약 pw_chk POST값이 있다면
                         {
-                            ?>
-                            <script type="text/javascript">location.replace("qa_view.php?number=<?php echo $rows['number']?>");</script><!-- pwk와 bpw값이 같으면 read.php로 보내고 -->
-                        <?php
-                        }else{ ?>
-                            <script type="text/javascript">alert('비밀번호가 틀립니다');</script><!--- 아니면 비밀번호가 틀리다는 메시지를 보여줍니다 -->
-                        <?php } } ?>
+                            $pwk = $_POST['pw_chk']; // $pwk변수에 POST값으로 받은 pw_chk를 넣습니다.
+                            if($pwk == $bpw) //다시 if문으로 DB의 pw와 입력하여 받아온 bpw와 값이 같은지 비교를 하고
+                            {
+                                ?>
+                                <script type="text/javascript">location.replace("qa_view.php?number=<?php echo $rows['number']?>");</script><!-- pwk와 bpw값이 같으면 read.php로 보내고 -->
+                            <?php
+                            }else{ ?>
+                                <script type="text/javascript">alert('비밀번호가 틀립니다');</script><!--- 아니면 비밀번호가 틀리다는 메시지를 보여줍니다 -->
+                            <?php }
+                        }
+                    } ?>
 
 
             </div>
