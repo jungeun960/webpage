@@ -37,11 +37,36 @@
         }
         a:link {color : #57A0EE; text-decoration:none;}
         a:hover { text-decoration : underline;}
+
+        .main {
+            width: 50%;
+            margin: 50px auto;
+        }
+
+        /* Bootstrap 4 text input with search icon */
+
+        .has-search .form-control {
+            padding-left: 2.375rem;
+        }
+
+        .has-search .form-control-feedback {
+            position: absolute;
+            z-index: 2;
+            display: block;
+            width: 2.375rem;
+            height: 2.375rem;
+            line-height: 2.375rem;
+            text-align: center;
+            pointer-events: none;
+            color: #aaa;
+        }
+
     </style>
 
     <script>
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
     </script>
+
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
@@ -86,7 +111,7 @@
         <div class="row">
 
             <!-- menu -->
-            <div>
+            <div >
                 <section>
                     <h3>C A T E G O R Y</h3>
                     <ul class="alt">
@@ -118,7 +143,7 @@
             </div>
             <!--</menu>-->
 
-             <h2> NOTICE </h2>
+
 
             <?php
                 $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
@@ -128,6 +153,7 @@
 
             ?>
             <div class="8u skel-cell-important">
+                <h2> NOTICE </h2>
                 <table align = center>
                     <thead align = "center">
                     <tr>
@@ -164,7 +190,22 @@
                     </tbody>
                 </table>
 
+<!--                검색-->
+                <div class="main">
+                    <!-- Another variation with a button -->
+                    <div style="float: left; width: 70%; padding-left: 40px" >
+                        <input type="text" class="form-control" placeholder="Search this blog">
+                    </div>
+                    <div style="float: left; width: 30%;">
+                        <button class="btn btn-secondary" type="button" style="width: 45px; height: 45px">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    <br>
+                </div>
+
                 <?php
+
 
 
 
@@ -183,6 +224,8 @@
                 <?php
                 }
                 ?>
+
+
             </div>
         </div>
 
