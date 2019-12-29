@@ -4,6 +4,9 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+
+<?php session_start(); ?>
+
 <html  class="no-js">
 <head>
     <style>
@@ -69,9 +72,9 @@
 <body id="top">
 <div id="fouc">
 
-<!-- Header -->
-<div id="headers"></div>
-<!--</header>-->
+    <!-- Header -->
+    <div id="headers"></div>
+    <!--</header>-->
 
 <!-- Main -->
 <section id="main" class="wrapper style1">
@@ -161,15 +164,26 @@
                     </tbody>
                 </table>
 
-                <div class = text>
-                    <font style="cursor: hand"onClick="location.href='./notice_write.php'">글쓰기</font>
-                </div>
+                <?php
+
+
+              
+                if($_SESSION['id']=='admin') {
+                ?>
+                    <div class = text>
+                        <font style="cursor: hand"onClick="location.href='./notice_write.php'">글쓰기</font>
+                    </div>
+                <?php
+                }else{
+                ?>
+<!--                    <div class = text>-->
+
+<!--                    <font style="cursor: hand"onClick="location.href='./notice_write.php'"><?php echo $_SESSION['id']?> 권한음슴</font>-->
+<!--                    </div>-->
+                <?php
+                }
+                ?>
             </div>
-
-
-
-
-
         </div>
 
     </div>

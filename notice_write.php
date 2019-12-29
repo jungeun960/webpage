@@ -4,12 +4,35 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php session_start(); ?>
+
 <html class="no-js">
 <head>
     <style>
         .js #fouc {display: none}
 
         a:link {color : #57A0EE; text-decoration:none;}
+
+        table.table2{
+            border-collapse: separate;
+            border-spacing: 1px;
+            text-align: left;
+            line-height: 1.5;
+            border-top: 1px solid #ccc;
+            margin : 20px 10px;
+        }
+        table.table2 tr {
+            width: 40px;
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+        table.table2 td {
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
     </style>
     <script>
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
@@ -41,29 +64,7 @@
         <link rel="stylesheet" href="css/style-xlarge.css" />
     </noscript>
 </head>
-<style>
-    table.table2{
-        border-collapse: separate;
-        border-spacing: 1px;
-        text-align: left;
-        line-height: 1.5;
-        border-top: 1px solid #ccc;
-        margin : 20px 10px;
-    }
-    table.table2 tr {
-        width: 40px;
-        padding: 10px;
-        font-weight: bold;
-        vertical-align: top;
-        border-bottom: 1px solid #ccc;
-    }
-    table.table2 td {
-        padding: 10px;
-        vertical-align: top;
-        border-bottom: 1px solid #ccc;
-    }
 
-</style>
 <body id="top">
 <div id="fouc">
 
@@ -123,9 +124,6 @@
                 </div>
                 <!--</menu>-->
 
-
-
-
                 <h2> 공지사항 작성하기 </h2>
                 <div class="8u skel-cell-important">
                     <form method = "post" action = "notice_write_action.php">
@@ -136,7 +134,9 @@
                                     <table class = "table2">
                                         <tr>
                                             <td>작성자</td>
-                                            <td><input type = text name =name size=20> </td>
+<!--                                            세션에서 현재 작성자 불러옴-->
+                                            <td> <?php echo $_SESSION['id']?> </td>
+<!--                                            <td><input type = text name =name size=20> </td>-->
                                         </tr>
 
                                         <tr>

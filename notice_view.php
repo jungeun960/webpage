@@ -4,6 +4,8 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php session_start(); ?>
+
 <html class="no-js">
 <head>
     <style>
@@ -151,9 +153,11 @@
 </head>
 <body id="top">
 <div id="fouc">
+
     <!-- Header -->
     <div id="headers"></div>
     <!--</header>-->
+
 
     <!-- Main -->
     <section id="main" class="wrapper style1">
@@ -238,8 +242,19 @@
                     <div class="view_btn">
                         <div id="btn_group">
                             <button  onclick="location.href='./notice.html'">목록으로</button>
-                            <button  onclick="location.href='./notice_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
-                            <button  onclick="location.href='./notice_delete.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">삭제</button>
+
+
+<!--                            관리자만 수정 삭제 보이도록 함-->
+                            <?php
+                            if($_SESSION['id']=='admin') {
+                                ?>
+                                <button  onclick="location.href='./notice_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
+                                <button  onclick="location.href='./notice_delete.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">삭제</button>
+                                <?php
+                            }
+                            ?>
+
+
                         </div>
                     </div>
 
