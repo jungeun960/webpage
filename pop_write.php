@@ -108,54 +108,28 @@
                 <!--</menu>-->
 
 
-                <h2> 상품 등록하기 </h2>
+                <h2> POPUP 등록하기 </h2>
                 <div class="8u skel-cell-important">
-                    <form method = "post" action = "product_write_action.php" enctype="multipart/form-data">
+                    <form method = "post" action = "pop_write_action.php" enctype="multipart/form-data">
                         <table  style="padding-top:50px" align = center border=0 cellpadding=2 >
 
                             <tr>
                                 <td bgcolor=white>
                                     <table class = "table2">
+                                        
                                         <tr>
-                                            <td>카테고리</td>
-                                            <td>
-                                                <!--                                            <input type = text name =title size=60>-->
-                                                <select id="browsers" name="category" size="1" required autofocus>
-                                                    <option value="TOP" selected>TOP</option>
-                                                    <option value="OUTER">OUTER</option>
-                                                    <option value="PANTS">PANTS</option>
-                                                    <option value="DRESS" >DRESS</option>
-                                                    <option value="SKIRT" >SKIRT</option>
-                                                </select>
-                                            </td>
+                                            <td>제목</td>
+                                            <td><input type = text name =title size=20> </td>
                                         </tr>
 
                                         <tr>
-                                            <td>제품 이름</td>
-                                            <td><input type = text name =name size=20> </td>
-                                        </tr>
-
-                                        <tr>
-                                            <td>판매가</td>
-                                            <td><input type = text name =price size=20> </td>
-
-                                        </tr>
-
-                                        <tr>
-                                            <td>코멘트</td>
-                                            <td><textarea name =content cols=85 rows=4 wrap="hard"></textarea></td>
-
-                                        </tr>
-
-
-                                        <tr>
-                                            <td> 대표사진 &nbsp &nbsp </td>
+                                            <td> POPUP 이미지 &nbsp &nbsp </td>
                                             <td>
                                                 <input type='file' name='myfile'>
-<!--                                            <form action="./file_upload.php" enctype="multipart/form-data" method='post'>-->
-<!--                                                -->
-<!--                                                <button>보내기</button>-->
-<!--                                            </form>-->
+                                                <!--                                            <form action="./file_upload.php" enctype="multipart/form-data" method='post'>-->
+                                                <!--                                                -->
+                                                <!--                                                <button>보내기</button>-->
+                                                <!--                                            </form>-->
                                             </td>
 
                                         </tr>

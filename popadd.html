@@ -61,12 +61,12 @@
                     <section>
                         <h3>C A T E G O R Y</h3>
                         <br>
-                                <ul class="actions" >
-                                    <li><a href="add.html" class="button alt" style="width: 200px">상품 등록하기</a></li>
-                                </ul>
-                                <ul class="actions">
-                                    <li><a href="popadd.html" class="button alt" style="width: 200px">팝업창 등록하기</a></li>
-                                </ul>
+                        <ul class="actions" >
+                            <li><a href="add.html" class="button alt" style="width: 200px">상품 등록하기</a></li>
+                        </ul>
+                        <ul class="actions">
+                            <li><a href="popadd.html" class="button alt" style="width: 200px">팝업창 등록하기</a></li>
+                        </ul>
                     </section>
                     <hr/>
                 </div>
@@ -74,53 +74,63 @@
 
 
 
-                <h2> 상품 등록하기 </h2>
+                <h2> POPUP 등록하기 </h2>
 
-                <font style="cursor: hand"onClick="location.href='./product_write.php'">등록하기</font>
 
-                    <?php
+                <font style="cursor: hand"onClick="location.href='./pop_write.php'">등록하기</font>
+
+                <?php
                         $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
-                        $query ="select * from  product_board order by number desc";
+                        $query ="select * from  pop order by number desc";
                         $result = $connect->query($query);
-                            $total = mysqli_num_rows($result);
+                $total = mysqli_num_rows($result);
 
-                     ?>
-                    <div class="8u skel-cell-important">
-                        <table align = center>
-                            <thead align = "center">
-                            <tr>
-                                <td width = "100" align="center">번호</td>
-                                <td width = "100" align = "center">카테고리</td>
-                                <td width = "500" align = "center">상품명</td>
-                                <td width = "300" align = "center">가격</td>
-                                <td width = "100" align = "center"></td>
-                            </tr>
-                            </thead>
+                ?>
+                <div class="8u skel-cell-important">
+                    <table align = center>
+                        <thead align = "center">
+                        <tr>
+                            <td width = "100" align="center">번호</td>
+                            <td width = "100" align="center">이미지</td>
+                            <td width = "100" align = "center">제목</td>
+                            <td width = "500" align = "center">날짜</td>
+                            <td width = "100" align = "center"></td>
 
-                            <tbody>
-                            <?php
+                        </tr>
+                        </thead>
+
+                        <tbody>
+                        <?php
                     while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
                             if($total%2==0){
             ?>                      <tr class = "even">
-                                <?php   }
+                            <?php   }
                             else{
             ?>                      <tr>
-                                <?php } ?>
-                                <td width = "50" align = "center"><?php echo $total?></td>
-                                <td width = "500" align = "center">
-                                    <a href = "product_view.php?number=<?php echo $rows['number']?>">
-                                        <?php echo $rows['category']?></td>
+                            <?php } ?>
 
-                                <td width = "100" align = "center"><?php echo $rows['name']?></td>
-                                <td width = "200" align = "center"><?php echo $rows['price']?></td>
+                            <td width = "50" align = "center" style="vertical-align: middle" ><?php echo $total?></td>
+                            <td width = "200" align = "center">
+                                <img src="/uploads/<?php echo $rows['photo'];?>" align = "center" width="100" height="170" alt="" />
+                            </td>
 
-                            </tr>
-                            <?php
+                            <td width = "500" align = "center" style="vertical-align: middle" >
+                                    <?php echo $rows['title']?></td>
+                            <td width = "200" align = "center" style="vertical-align: middle" ><?php echo $rows['date']?></td>
+
+                            <td style="vertical-align: middle">
+                                <a href="./pop_delete.php?number=<?=$rows['number']?>">
+                                    삭제
+                                </a>
+                            </td>
+
+                        </tr>
+                        <?php
                     $total--;
                     }
             ?>
-                            </tbody>
-                        </table>
+                        </tbody>
+                    </table>
 
                     <br>
 
