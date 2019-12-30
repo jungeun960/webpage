@@ -177,7 +177,8 @@
                         <td width = "50" align = "center"><?php echo $total?></td>
 
                         <?php
-                          $boardtime = $rows['date']; //$boardtime변수에 board['date']값을 넣음
+
+                          $boardtime = $rows['date']; //$boardtime변수에 rows['date']값을 넣음
                           $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
 
                           if($boardtime==$timenow){
@@ -189,7 +190,7 @@
 
                         <td width = "500" align = "center">
                             <a href = "notice_view.php?number=<?php echo $rows['number']?>">
-                                <?php echo $rows['title']?> <?php echo $img; ?></td>
+                                <?php echo $rows['title']?> &nbsp <?php echo $img; ?></td>
 
                         <td width = "100" align = "center"><?php echo $rows['id']?></td>
                         <td width = "200" align = "center"><?php echo $rows['date']?></td>
