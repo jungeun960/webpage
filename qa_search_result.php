@@ -4,13 +4,46 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
-
-<?php session_start(); ?>
-
-<html  class="no-js">
+<html class="no-js">
 <head>
     <style>
         .js #fouc {display: none}
+
+        .main {
+            width: 50%;
+            margin: 50px auto;
+        }
+        /* Bootstrap 4 text input with search icon */
+        .has-search .form-control {
+            padding-left: 2.375rem;
+        }
+        .has-search .form-control-feedback {
+            position: absolute;
+            z-index: 2;
+            display: block;
+            width: 2.375rem;
+            height: 2.375rem;
+            line-height: 2.375rem;
+            text-align: center;
+            pointer-events: none;
+            color: #aaa;
+        }
+    </style>
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+            $("#menu").load("menu.html");
+
+        });
+    </script>
+
+    <style>
         table{
             border-top: 1px solid #444444;
             border-collapse: collapse;
@@ -36,40 +69,9 @@
         }
         a:link {color : #57A0EE; text-decoration:none;}
         a:hover { text-decoration : underline;}
-        .main {
-            width: 50%;
-            margin: 50px auto;
-        }
-        /* Bootstrap 4 text input with search icon */
-        .has-search .form-control {
-            padding-left: 2.375rem;
-        }
-        .has-search .form-control-feedback {
-            position: absolute;
-            z-index: 2;
-            display: block;
-            width: 2.375rem;
-            height: 2.375rem;
-            line-height: 2.375rem;
-            text-align: center;
-            pointer-events: none;
-            color: #aaa;
-        }
+        .re_ct {font-weight:bold;}
+
     </style>
-
-    <script>
-        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
-    </script>
-
-
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready( function() {
-            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
-            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
-            $("#menu").load("menu.html");
-        });
-    </script>
 
     <title>CHOIshop</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
@@ -103,7 +105,7 @@
             <div class="row">
 
                 <!-- menu -->
-                <div >
+                <div>
                     <section>
                         <h3>C A T E G O R Y</h3>
                         <ul class="alt">
@@ -136,70 +138,78 @@
                 <!--</menu>-->
 
 
-
                 <?php
+                $search_con = $_GET['search'];
+
                 $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
-                $query ="select * from notice_board order by number desc";
+                $query ="select * from qa_board where id like '%$search_con%' order by number desc";
+
                 $result = $connect->query($query);
                 $total = mysqli_num_rows($result);
 
                 ?>
                 <div class="8u skel-cell-important">
-                    <h2> NOTICE </h2>
+                    <h2>'<?php echo $search_con; ?>' 검색결과</h2>
+                    <h4 style="margin-top:30px;"><a href="q_and_a.html">뒤로가기</a></h4>
                     <table align = center>
                         <thead align = "center">
                         <tr>
                             <td width = "100" align="center">번호</td>
-                            <td width = "500" align = "center">제목</td>
+                            <td width = "500" align = "center">카테고리</td>
                             <td width = "100" align = "center">작성자</td>
                             <td width = "300" align = "center">날짜</td>
-                            <td width = "100" align = "center">조회수</td>
                         </tr>
                         </thead>
 
                         <tbody>
+
+
                         <?php
-                    while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
+                        while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
                             if($total%2==0){
-            ?>                      <tr class = "even">
+                                ?>                      <tr class = "even">
                             <?php   }
                             else{
-            ?>                      <tr>
+                                ?>                      <tr>
                             <?php } ?>
-                            <td width = "50" align = "center"><?php echo $total?></td>
 
                             <?php
-                          $boardtime = $rows['date']; //$boardtime변수에 board['date']값을 넣음
-                          $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
+                            $query2 = "select * from reply where con_num='".$rows['number']."'";
+                            $result2 = $connect->query($query2);
+                            $rep_count = mysqli_num_rows($result2);
 
-                          if($boardtime==$timenow){
-                            $img = "<img src='/images/new.png' alt='new' title='new' />";
+                            $boardtime = $rows['date']; //$boardtime변수에 rows['date']값을 넣음
+                            $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
+
+                            if($boardtime==$timenow){
+                                $img = "<img src='/images/new.png' alt='new' title='new' />";
                             }else{
-                            $img ="";
+                                $img ="";
                             }
+
                             ?>
 
+                            <td width = "50" align = "center"><?php echo $total?></td>
                             <td width = "500" align = "center">
-                                <a href = "notice_view.php?number=<?php echo $rows['number']?>">
-                                    <?php echo $rows['title']?> <?php echo $img; ?></td>
-
+                                <a href = "qa_read.php?number=<?php echo $rows['number']?>">
+                                    <?php echo $rows['category']?>&nbsp <span class="re_ct">[<?php echo $rep_count; ?>]</span> &nbsp <?php echo $img; ?>
+                            </td>
                             <td width = "100" align = "center"><?php echo $rows['id']?></td>
                             <td width = "200" align = "center"><?php echo $rows['date']?></td>
-                            <td width = "50" align = "center"><?php echo $rows['hit']?></td>
-                        </tr>
-                        <?php
-                    $total--;
-                    }
-            ?>
+                            </tr>
+                            <?php
+                            $total--;
+                        }
+                        ?>
                         </tbody>
                     </table>
 
                     <!--                검색-->
 
                     <div class="main">
-                        <form action="search_result.php" method="get">
+                        <form action="qa_search_result.php" method="get">
                             <div style="float: left; width: 70%; padding-left: 40px" >
-                                <input type="text" name="search" class="form-control" placeholder="Search title">
+                                <input type="text" name="search" class="form-control" placeholder="Search User">
                             </div>
 
                             <button style="width: 45px; height: 45px">
@@ -209,27 +219,11 @@
                     </div>
                     <!--                검색 끝-->
 
-
-                    <?php
-
-                if($_SESSION['id']=='admin') {
-                ?>
                     <div class = text>
-                        <font style="cursor: hand"onClick="location.href='./notice_write.php'">글쓰기</font>
+                        <font style="cursor: hand"onClick="location.href='./qa_write.html'">글쓰기</font>
                     </div>
-                    <?php
-                }else{
-                ?>
-                    <!--                    <div class = text>-->
-
-                    <!--                    <font style="cursor: hand"onClick="location.href='./notice_write.php'"><?php echo $_SESSION['id']?> 권한음슴</font>-->
-                    <!--                    </div>-->
-                    <?php
-                }
-                ?>
-
-
                 </div>
+
             </div>
 
         </div>

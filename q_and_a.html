@@ -8,6 +8,26 @@
 <head>
     <style>
         .js #fouc {display: none}
+
+        .main {
+            width: 50%;
+            margin: 50px auto;
+        }
+        /* Bootstrap 4 text input with search icon */
+        .has-search .form-control {
+            padding-left: 2.375rem;
+        }
+        .has-search .form-control-feedback {
+            position: absolute;
+            z-index: 2;
+            display: block;
+            width: 2.375rem;
+            height: 2.375rem;
+            line-height: 2.375rem;
+            text-align: center;
+            pointer-events: none;
+            color: #aaa;
+        }
     </style>
     <script>
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
@@ -179,6 +199,21 @@
                 ?>
                         </tbody>
                     </table>
+
+                    <!--                검색-->
+
+                    <div class="main">
+                        <form action="qa_search_result.php" method="get">
+                            <div style="float: left; width: 70%; padding-left: 40px" >
+                                <input type="text" name="search" class="form-control" placeholder="Search User">
+                            </div>
+
+                            <button style="width: 45px; height: 45px">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <!--                검색 끝-->
 
                     <div class = text>
                         <font style="cursor: hand"onClick="location.href='./qa_write.html'">글쓰기</font>
