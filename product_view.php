@@ -238,6 +238,7 @@
                 ?>
 
 
+
                 <div>
                     <div id = "side_left">
                         <img src="/uploads/<?php echo $rows['photo']; ?>" align = "center" alt="" width="490" height="490"/>
@@ -253,6 +254,23 @@
                         <br><br>
 <!--                        <div id = "side_content_box">코멘트  &nbsp &nbsp</div>-->
                         <div id = "side_content_box"><?php echo $rows['content']?></div>
+
+                        <br><br>
+                        <div id = "side_content_box">수량</div>
+
+
+                            <td><span style="font-size:12px;color:#555555;">
+                            <span id='NewProductQuantityDummy' >
+                                <span class="quantity">
+                                    <input id="quantity" name="quantity_name" style="width: 30px;height: 18px;border: 1px solid #BCBCBC;" value="" type="text"  />
+                                    <img src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketUp.gif"  class="QuantityUp" alt="수량증가" />
+                                    <img src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketDown.gif"  class="QuantityDown" alt="수량감소" />
+                                </span>
+                            </span>
+                        </span>
+                            </td>
+
+
 
                         <br><br><br>
                         <input type = "button" value="BUY" width="300">
