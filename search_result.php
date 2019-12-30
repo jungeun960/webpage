@@ -138,14 +138,21 @@
 
 
                 <?php
+                $search_con = $_GET['search'];
+
                 $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
-                $query ="select * from notice_board order by number desc";
+                $query ="select * from notice_board where title like '%$search_con%' order by number desc";
+
                 $result = $connect->query($query);
                 $total = mysqli_num_rows($result);
 
                 ?>
                 <div class="8u skel-cell-important">
-                    <h2> NOTICE </h2>
+
+
+
+                    <h2>'<?php echo $search_con; ?>' 검색결과</h2>
+                    <h4 style="margin-top:30px;"><a href="/notice.html">뒤로가기</a></h4>
                     <table align = center>
                         <thead align = "center">
                         <tr>
@@ -159,23 +166,23 @@
 
                         <tbody>
                         <?php
-                    while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
+                        while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
                             if($total%2==0){
-            ?>                      <tr class = "even">
+                                ?>                      <tr class = "even">
                             <?php   }
                             else{
-            ?>                      <tr>
+                                ?>                      <tr>
                             <?php } ?>
                             <td width = "50" align = "center"><?php echo $total?></td>
 
                             <?php
-                          $boardtime = $rows['date']; //$boardtime변수에 board['date']값을 넣음
-                          $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
+                            $boardtime = $rows['date']; //$boardtime변수에 board['date']값을 넣음
+                            $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
 
-                          if($boardtime==$timenow){
-                            $img = "<img src='/images/new.png' alt='new' title='new' />";
+                            if($boardtime==$timenow){
+                                $img = "<img src='/images/new.png' alt='new' title='new' />";
                             }else{
-                            $img ="";
+                                $img ="";
                             }
                             ?>
 
@@ -186,11 +193,11 @@
                             <td width = "100" align = "center"><?php echo $rows['id']?></td>
                             <td width = "200" align = "center"><?php echo $rows['date']?></td>
                             <td width = "50" align = "center"><?php echo $rows['hit']?></td>
-                        </tr>
-                        <?php
-                    $total--;
-                    }
-            ?>
+                            </tr>
+                            <?php
+                            $total--;
+                        }
+                        ?>
                         </tbody>
                     </table>
 
@@ -210,23 +217,6 @@
                     <!--                검색 끝-->
 
 
-               <?php
-
-                if($_SESSION['id']=='admin') {
-                ?>
-                    <div class = text>
-                        <font style="cursor: hand"onClick="location.href='./notice_write.php'">글쓰기</font>
-                    </div>
-                    <?php
-                }else{
-                ?>
-                    <!--                    <div class = text>-->
-
-                    <!--                    <font style="cursor: hand"onClick="location.href='./notice_write.php'"><?php echo $_SESSION['id']?> 권한음슴</font>-->
-                    <!--                    </div>-->
-                    <?php
-                }
-                ?>
 
 
                 </div>
