@@ -11,7 +11,6 @@
 <head>
     <style>
         .js #fouc {display: none}
-
         table{
             border-top: 1px solid #444444;
             border-collapse: collapse;
@@ -37,18 +36,14 @@
         }
         a:link {color : #57A0EE; text-decoration:none;}
         a:hover { text-decoration : underline;}
-
         .main {
             width: 50%;
             margin: 50px auto;
         }
-
         /* Bootstrap 4 text input with search icon */
-
         .has-search .form-control {
             padding-left: 2.375rem;
         }
-
         .has-search .form-control-feedback {
             position: absolute;
             z-index: 2;
@@ -60,7 +55,6 @@
             pointer-events: none;
             color: #aaa;
         }
-
         #page_num {
             font-size: 14px;
             margin-left: 260px;
@@ -75,7 +69,6 @@
             font-weight: bold;
             color:red;
         }
-
     </style>
 
     <script>
@@ -86,11 +79,9 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready( function() {
-
             $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
             $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
             $("#menu").load("menu.html");
-
         });
     </script>
 
@@ -165,7 +156,6 @@
                 $query ="select * from notice_board order by number desc";
                 $result = $connect->query($query);
                 $total = mysqli_num_rows($result);
-
                 ?>
                 <div class="8u skel-cell-important">
                     <h2> NOTICE </h2>
@@ -191,21 +181,17 @@
                         $row_num = mysqli_num_rows($result3);
                         $list = 10; //한 페이지에 보여줄 개수
                         $block_ct = 5; //블록당 보여줄 페이지 개수
-
                         $block_num = ceil($page/$block_ct); // 현재 페이지 블록 구하기
                         $block_start = (($block_num - 1) * $block_ct) + 1; // 블록의 시작번호
                         $block_end = $block_start + $block_ct - 1; //블록 마지막 번호
-
                         $total_page = ceil($row_num / $list); // 페이징한 페이지 수 구하기
                         if($block_end > $total_page) $block_end = $total_page; //만약 블록의 마지박 번호가 페이지수보다 많다면 마지박번호는 페이지 수
                         $total_block = ceil($total_page/$block_ct); //블럭 총 개수
                         $start_num = ($page-1) * $list; //시작번호 (page-1)에서 $list를 곱한다.
-
                         $query4 = "select * from notice_board order by number desc limit $start_num, $list";
                         $result4 = $connect->query($query4);
                         while($board = $result4->fetch_array()){
                         $title=$board["title"];
-
                         ?>
 
                         <tbody>
@@ -213,10 +199,8 @@
                         <td width = "50" align = "center"><?php echo $total?></td>
 
                         <?php
-
                         $boardtime = $rows['date']; //$boardtime변수에 rows['date']값을 넣음
                         $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
-
                         if($boardtime==$timenow){
                             $img = "<img src='/images/new.png' alt='new' title='new' />";
                         }else{
@@ -253,7 +237,6 @@
                             }
                             if($page <= 1)
                             { //만약 page가 1보다 크거나 같다면 빈값
-
                             }else{
                                 $pre = $page-1; //pre변수에 page-1을 해준다 만약 현재 페이지가 3인데 이전버튼을 누르면 2번페이지로 갈 수 있게 함
                                 echo "<li><a href='?page=$pre'>이전</a></li>"; //이전글자에 pre변수를 링크한다. 이러면 이전버튼을 누를때마다 현재 페이지에서 -1하게 된다.
@@ -298,10 +281,6 @@
                     </div>
 
                     <?php
-
-
-
-
                     if($_SESSION['id']=='admin') {
                         ?>
                         <div class = text>

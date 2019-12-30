@@ -41,11 +41,9 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready( function() {
-
             $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
             $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
             $("#menu").load("menu.html");
-
         });
     </script>
 
@@ -81,7 +79,6 @@
 
         <script>
             function write() {
-
                 var str = document.getElementById("textarea").value;
                 str = str.replace(/(?:\r\n|\r|\n)/g, '<br/>');
                 document.getElementById("textarea").value = str;
@@ -134,9 +131,9 @@
                                     <table class = "table2">
                                         <tr>
                                             <td>작성자</td>
-<!--                                            세션에서 현재 작성자 불러옴-->
+                                            <!--                                            세션에서 현재 작성자 불러옴-->
                                             <td> <?php echo $_SESSION['id']?> </td>
-<!--                                            <td><input type = text name =name size=20> </td>-->
+                                            <!--                                            <td><input type = text name =name size=20> </td>-->
                                         </tr>
 
                                         <tr>

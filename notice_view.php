@@ -9,21 +9,15 @@
 <html class="no-js">
 <head>
     <style>
-
         .js #fouc {display: none}
-
         a:link {color : #57A0EE; text-decoration:none;}
-
         table {
             width: 100%;
             border: 1px solid #444444;
         }
-
         th, td {
-
             padding: 10px;
         }
-
         .view_table {
             margin-top: 30px;
             border: 1px solid #444444;
@@ -34,12 +28,10 @@
             background-color: white;
             width: 1000px;
             border: 1px solid #444444;
-
         }
         .view_id {
             text-align: center;
             background-color: white;
-
             width: 30px;
         }
         .view_id2 {
@@ -94,19 +86,16 @@
         .view_comment {
             width: 500px;
         }
-
         #test_btn1{
             border-top-left-radius: 5px;
             border-bottom-left-radius: 5px;
             margin-right:-4px;
         }
-
         #test_btn2{
             border-top-right-radius: 5px;
             border-bottom-right-radius: 5px;
             margin-left:-3px;
         }
-
         #btn_group button{
             border: 1px solid snow;
             background-color: rgba(0,0,0,0);
@@ -117,8 +106,6 @@
             color:white;
             background-color: lightslategrey;
         }
-
-
     </style>
 
     <script>
@@ -128,11 +115,9 @@
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script type="text/javascript">
         $(document).ready( function() {
-
             $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
             $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
             $("#menu").load("menu.html");
-
         });
     </script>
 
@@ -203,18 +188,14 @@
 
 
                 <?php
-                    $conn = mysqli_connect("localhost","root","sql","data2019");
-                    $number = $_GET['number'];
-
-
+                $conn = mysqli_connect("localhost","root","sql","data2019");
+                $number = $_GET['number'];
                 // 조회수 상승 코드
-                    $hit = "update notice_board set hit=hit+1 where number=$number";
-                    $conn->query($hit);
-
-
-                    $query = "select title, content, date, hit, id from notice_board where number =$number";
-                    $result = $conn->query($query);
-                    $rows = mysqli_fetch_assoc($result);
+                $hit = "update notice_board set hit=hit+1 where number=$number";
+                $conn->query($hit);
+                $query = "select title, content, date, hit, id from notice_board where number =$number";
+                $result = $conn->query($query);
+                $rows = mysqli_fetch_assoc($result);
                 ?>
 
 
@@ -244,7 +225,7 @@
                             <button  onclick="location.href='./notice.html'">목록으로</button>
 
 
-<!--                            관리자만 수정 삭제 보이도록 함-->
+                            <!--                            관리자만 수정 삭제 보이도록 함-->
                             <?php
                             if($_SESSION['id']=='admin') {
                                 ?>
