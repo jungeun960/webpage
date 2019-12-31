@@ -21,45 +21,7 @@
             padding: 10px;
         }
 
-        .view_table {
-            margin-top: 30px;
-            border: 1px solid #444444;
-        }
-        .view_title {
-            height: 30px;
-            text-align: center;
-            background-color: white;
-            width: 1000px;
-            border: 1px solid #444444;
 
-        }
-        .view_id {
-            text-align: center;
-            background-color: white;
-
-            width: 30px;
-        }
-        .view_id2 {
-            background-color: white;
-            width: 60px;
-            border: 1px solid #444444;
-            margin-left: 20px;
-        }
-        .view_hit {
-            background-color: white;
-            width: 30px;
-            text-align: center;
-        }
-        .view_hit2 {
-            background-color: white;
-            width: 60px;
-        }
-        .view_content {
-            padding: 20px;
-            height: 500px;
-            background-color: white;
-            border: 1px solid #444444;
-        }
         .view_btn {
             width: 700px;
             height: 200px;
@@ -67,44 +29,7 @@
             margin: auto;
             margin-top: 50px;
         }
-        .view_btn1 {
-            height: 50px;
-            width: 100px;
-            font-size: 20px;
-            text-align: center;
-            background-color: white;
-            border: 2px solid black;
-            border-radius: 10px;
-        }
-        .view_comment_input {
-            width: 700px;
-            height: 500px;
-            text-align: center;
-            margin: auto;
-        }
-        .view_text3 {
-            font-weight: bold;
-            float: left;
-            margin-left: 20px;
-        }
-        .view_com_id {
-            width: 100px;
-        }
-        .view_comment {
-            width: 500px;
-        }
 
-        #test_btn1{
-            border-top-left-radius: 5px;
-            border-bottom-left-radius: 5px;
-            margin-right:-4px;
-        }
-
-        #test_btn2{
-            border-top-right-radius: 5px;
-            border-bottom-right-radius: 5px;
-            margin-left:-3px;
-        }
 
         #btn_group button{
             border: 1px solid snow;
@@ -123,13 +48,7 @@
             float:left;
             margin:5px;
         }
-        #side_left_box{
-            width:95%;
-            height:45%;
 
-            float:left;
-            margin:5px;
-        }
         #mid_content{
             width:400px;
             height:400px;
@@ -145,22 +64,69 @@
 
 
 
+        .layer_bg{position:fixed; width:100%; height:100%; background: rgba(0,0,0,0.7); left:0; top:0}
+        .layer_wrap{position:absolute; width:300px; height:100px; background:#fff; text-align: center}
+
 
     </style>
+
+
 
     <script>
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
     </script>
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready( function() {
 
             $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
             $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
             $("#menu").load("menu.html");
-
         });
+    </script>
+
+    <script>
+        $(function () {
+            // 레이어 display none 상태
+            $(".layer_bg, .layer_wrap").hide();
+            //레이어팝업 위치 지정 function 만들기
+            function layer_position(){
+                var win_W = $(window).width();
+                var win_H = $(window).height();
+                $(".layer_wrap").css({'left':(win_W-300)/2, 'top':(win_H-100)/2});
+            };
+            //레이어팝업 open 상태 function 만들기
+            function layer_open(no){
+                $(".layer_wrap[layer="+no+"]").fadeIn();
+                $(".layer_bg").fadeIn();
+                layer_position();
+                //레이어 영역 외 바탕화면 클릭시 화면 닫기
+                $(".layer_bg").click(function (e) {
+                    if(!$(".layer_wrap").has(e.target).length){
+                        layer_close();
+                    };
+                });
+            };
+            //레이어팝업 close 상태 function 만들기
+            function layer_close(){
+                $(".layer_wrap, .layer_bg").fadeOut();
+            };
+            //링크 클릭시 해당 레이어팝업 호출
+            $(".btn_layer").click(function () {
+                var no = $(this).attr("layer");
+                layer_open(no);
+            });
+            //닫기 버튼 클릭시 레이어 닫기
+            $(".btn_close").click(function () {
+                layer_close();
+            });
+            //반응형 대응 - 레이어 위치 잡기
+            $(window).resize(function () {
+                layer_position();
+            });
+        })
     </script>
 
     <title>CHOIshop</title>
@@ -256,25 +222,40 @@
                         <div id = "side_content_box"><?php echo $rows['content']?></div>
 
                         <br><br>
-                        <div id = "side_content_box">수량</div>
+<!--                        <div id = "side_content_box">수량</div>-->
+<!---->
+<!---->
+<!--                            <td><span style="font-size:12px;color:#555555;">-->
+<!--                            <span id='NewProductQuantityDummy' >-->
+<!--                                <span class="quantity">-->
+<!--                                    <input id="quantity" name="quantity_name" style="width: 30px;height: 18px;border: 1px solid #BCBCBC;" value="" type="text"  />-->
+<!--                                    <img src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketUp.gif"  class="QuantityUp" alt="수량증가" />-->
+<!--                                    <img src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketDown.gif"  class="QuantityDown" alt="수량감소" />-->
+<!--                                </span>-->
+<!--                            </span>-->
+<!--                        </span>-->
+<!--                            </td>-->
 
 
-                            <td><span style="font-size:12px;color:#555555;">
-                            <span id='NewProductQuantityDummy' >
-                                <span class="quantity">
-                                    <input id="quantity" name="quantity_name" style="width: 30px;height: 18px;border: 1px solid #BCBCBC;" value="" type="text"  />
-                                    <img src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketUp.gif"  class="QuantityUp" alt="수량증가" />
-                                    <img src="//img.echosting.cafe24.com/design/skin/mono/product/btn_basketDown.gif"  class="QuantityDown" alt="수량감소" />
-                                </span>
-                            </span>
-                        </span>
-                            </td>
-
+<!--                        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
+<!--                        <div class="wrap">-->
+<!--                            <div class="layer_bg"></div>-->
+<!--                            <ul>-->
+<!--                                <li>-->
+<!--                                    <a href="javascript:;" class="btn_layer" layer="1">팝업 열기 1번</a>-->
+<!--                                    <div class="layer_wrap" layer="1">-->
+<!--                                        <p>안녕하세요 레이어팝업 1번 창입니다.</p>-->
+<!--                                        <a href="javascript:;" class="btn_close">닫기</a>-->
+<!--                                    </div>-->
+<!--                                </li>-->
+<!---->
+<!--                            </ul>-->
+<!--                        </div>-->
 
 
                         <br><br><br>
                         <input type = "button" value="BUY" width="300">
-                        <input type = "button" value="CART" width="300">
+                        <input type = "button" value="CART" width="300" onClick="location.href='/basket.html'">
 
                     </div>
                     <table >

@@ -4,6 +4,7 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php session_start(); ?>
 <html class="no-js">
 <head>
 
@@ -16,7 +17,6 @@
             position:absolute; top:80px; left:100px; text-align:center;
             border:1px #000;
         }
-
     </style>
 
     <script>
@@ -36,14 +36,34 @@
     </script>
 
     <!-- 팝업창 js -->
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#close').click(function() { // close라는 id를 가진 div를 클릭 시
-                $('#pop').hide(); // pop라는 id를 가진 div는 사라진다
-            });
-        });
+<!--    <script src="http://code.jquery.com/jquery-latest.js"></script>-->
+<!--    <script type="text/javascript">-->
+<!--        $(document).ready(function() {-->
+<!--            $('#close').click(function() { // close라는 id를 가진 div를 클릭 시-->
+<!--                $('#pop').hide(); // pop라는 id를 가진 div는 사라진다-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+
+    ﻿
+    <script language="JavaScript">
+        <!--
+        function setCookie( name, value, expiredays ) {
+            var todayDate = new Date();
+            todayDate.setDate( todayDate.getDate() + expiredays );
+            document.cookie = name + "=" + escape( value ) + "; path=/; expires=" + todayDate.toGMTString() + ";"
+        }
+
+        function closePop() {
+            if ( document.pop_form.chkbox.checked ){
+                setCookie( "maindiv", "done" , 1 );
+            }
+            document.all['pop'].style.visibility = "hidden";
+        }
+        //-->
     </script>
+
+
     <!-- 팝업창 js -->
 
     <title>CHOIshop</title>
@@ -78,16 +98,93 @@
     <div style="height:370px;">
         <a href="/notice.html" ><img src="/uploads/<?php echo $rows['photo'];?>" align = "center" width="300" height="370" alt="" /></a>
     </div>
-    <div>
-        <div id="close" style="size: 10px; width:100px; margin:auto;">닫기</div>
+
+    <div style="float:left; text-align:right; height:100px">
+        <form name="pop_form">
+            <div style="font-size:12px; font-family:'돋움'; padding-left:50px;">
+                <input type="checkbox" id="chkbox" name="chkbox" value="checkbox">
+                <label for="chkbox" style="padding-bottom: 3px;"></label>
+                오늘 하루동안 보지 않기 &nbsp &nbsp
+                <a href="javascript:closePop();">CLOSE</a>
+
+
+            </div>
+        </form>
     </div>
+
+    <script language="Javascript">
+        cookiedata = document.cookie;
+        if ( cookiedata.indexOf("maindiv=done") < 0 ){
+            document.all['pop'].style.visibility = "visible";
+        }
+        else {
+            document.all['pop'].style.visibility = "hidden";
+        }
+    </script>
 </div>
 <!--팝업창-->
 
 
 <div id="fouc">
 <!-- Header -->
-<div id="headers"></div>
+    <header id="header" class="skel-layers-fixed">
+        <h1><a href="main.html">CHOIshop</a></h1>
+
+        <nav id="nav">
+            <ul>
+                <!--            <li><a href="main.html">Home</a></li>-->
+                <!--            <li><a href="notice.html">NOTICE </a></li>-->
+                <!--            <li><a href="q_and_a.html">Q&A </a></li>-->
+                <!--            <li><a href="basket.html">장바구니 </a></li>-->
+                <!--            <li><a href="registrater.html">회원가입 &nbsp &nbsp</a></li>-->
+
+                <?php
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from board order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                session_start();
+
+                if(isset($_SESSION['id'])) {
+
+                echo $_SESSION['id'];?>님 안녕하세요
+                <li><a href="logout.php">&nbsp &nbsp &nbsp 로그아웃 </a></li>
+                <li><a href="basket.html">장바구니 </a></li>
+                <li><a href="main.html">Home</a></li>
+                <!--                        <li><a href="registrater.html">회원가입 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./logout.php'">로그아웃</button>-->
+                <?php
+                if($_SESSION['id']=='admin') {
+                ?>
+                <li><a href="add.html">관리자 페이지 &nbsp &nbsp</a></li>
+                <?php
+                }
+                ?>
+                <br/>
+                <?php
+                }
+                else {
+        ?>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="login.html">로그인</a></li>
+                <li><a href="registrater.html">회원가입 </a></li>
+                <!--                        <li><a href="basket.html">장바구니 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./login.php'">로그인</button>-->
+                <br />
+
+                <?php   }
+        ?>
+
+
+
+            </ul>
+        </nav>
+    </header>
 <!--</header>-->
 
 <!-- Main -->
@@ -137,6 +234,7 @@
                     <!-- <h2>Mollis ut adipiscing</h2> -->
                     <a href="#" ><img src="images/image1.PNG" align = "center" width="750" height="400" alt="" /></a>
 <!--                    <a href="#" ><img src="/uploads/dd.PNG" align = "center" width="750" height="400" alt="" /></a>-->
+
                 </section>
             </div>
 
