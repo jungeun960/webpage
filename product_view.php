@@ -4,6 +4,7 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php session_start(); ?>
 <html class="no-js">
 <head>
     <style>
@@ -242,7 +243,7 @@
                         <br>
                         <br>
                         <div id = "side_content_box">가격 &nbsp &nbsp &nbsp &nbsp</div>
-                        <div id = "side_content_box"><?php echo $rows['price']?> </div>
+                        <div id = "side_content_box"><?php echo $rows['price']?> </div> 원
 
                         <br><br>
 <!--                        <div id = "side_content_box">코멘트  &nbsp &nbsp</div>-->
@@ -272,6 +273,7 @@
                         <div style="float: left; width: 33%; margin: 15px">
                         <input type = "button" value="BUY" width="300">
                         </div>
+
 
 
                         <div id="pop" style="display:none;">
