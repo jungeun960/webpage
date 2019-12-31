@@ -90,10 +90,6 @@
 
 
 
-                <h2> 상품 등록하기 </h2>
-
-                <font style="cursor: hand"onClick="location.href='./product_write.php'">등록하기</font>
-
                     <?php
                         $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
                         $query ="select * from  product_board order by number desc";
@@ -102,6 +98,34 @@
 
                      ?>
                     <div class="8u skel-cell-important">
+
+
+                        <h2> 상품 등록하기 </h2>
+
+                        <font style="cursor: hand"onClick="location.href='./product_write.php'">등록하기</font>
+                        <br><br>
+
+<!--                        <form method = "post" action = "product_category.php">-->
+<!--                            <div>-->
+<!--                                <div style="float: right; margin-right: 50px">-->
+<!--                                    <input type="submit" value="보기">-->
+<!--                                </div>-->
+<!--                                <div style="float: right; width: 150px; ">-->
+<!--                                    <select id="browsers" name="category" size="1" required autofocus>-->
+<!--                                        <option value="ALL" selected>ALL</option>-->
+<!--                                        <option value="TOP" >TOP</option>-->
+<!--                                        <option value="OUTER">OUTER</option>-->
+<!--                                        <option value="PANTS">PANTS</option>-->
+<!--                                        <option value="DRESS" >DRESS</option>-->
+<!--                                        <option value="SKIRT" >SKIRT</option>-->
+<!--                                    </select>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </form>-->
+<!--                        <br><br>-->
+
+
+
                         <table align = center>
                             <thead align = "center">
                             <tr>
