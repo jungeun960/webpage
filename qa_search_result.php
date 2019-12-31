@@ -142,7 +142,7 @@
                 $search_con = $_GET['search'];
 
                 $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
-                $query ="select * from qa_board where id like '%$search_con%' order by number desc";
+                $query ="select * from qa_board where category like '%$search_con%' order by number desc";
 
                 $result = $connect->query($query);
                 $total = mysqli_num_rows($result);
