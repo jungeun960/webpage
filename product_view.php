@@ -63,6 +63,21 @@
         }
 
 
+        #pop{
+            width:450px; height:400px; background:#fff; color:#fff;
+            position:absolute; top:300px; left:750px; text-align:center;
+            /*border:2px  solid #000;*/
+
+        }
+
+        #pop_bt{
+
+        }
+
+        #close{
+            width:100px; margin:auto; cursor:pointer; font-weight:bold;
+        }
+
 
         .layer_bg{position:fixed; width:100%; height:100%; background: rgba(0,0,0,0.7); left:0; top:0}
         .layer_wrap{position:absolute; width:300px; height:100px; background:#fff; text-align: center}
@@ -70,7 +85,19 @@
 
     </style>
 
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#pop_bt').click(function() {
+                $('#pop').show();
+            });
+
+            $('#close').click(function() {
+                $('#pop').hide();
+            });
+        });
+    </script>
 
     <script>
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
@@ -236,26 +263,38 @@
 <!--                        </span>-->
 <!--                            </td>-->
 
+                        <br>
 
-<!--                        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>-->
-<!--                        <div class="wrap">-->
-<!--                            <div class="layer_bg"></div>-->
-<!--                            <ul>-->
-<!--                                <li>-->
-<!--                                    <a href="javascript:;" class="btn_layer" layer="1">팝업 열기 1번</a>-->
-<!--                                    <div class="layer_wrap" layer="1">-->
-<!--                                        <p>안녕하세요 레이어팝업 1번 창입니다.</p>-->
-<!--                                        <a href="javascript:;" class="btn_close">닫기</a>-->
-<!--                                    </div>-->
-<!--                                </li>-->
-<!---->
-<!--                            </ul>-->
-<!--                        </div>-->
+                        <div id="pop_bt" style="float: left; width: 33%; margin: 15px">
+                            <input type = "button" value="CART" width="300" id = "basket">
+                        </div>
 
-
-                        <br><br><br>
+                        <div style="float: left; width: 33%; margin: 15px">
                         <input type = "button" value="BUY" width="300">
-                        <input type = "button" value="CART" width="300" onClick="location.href='/basket.html'">
+                        </div>
+
+
+                        <div id="pop" style="display:none;">
+                            <div style="height:300px;">
+                                <img src="/images/basket.PNG" align = "center" width="450" height="300" alt="" />
+                            </div>
+
+                            <div style="float: left; width: 33%; margin: 30px" >
+                                <a href="/basket.html" >
+                                    <input type="submit" style="margin: 0" value="장바구니이동">
+                                </a>
+                            </div>
+
+                            <div id="close" style="float: left; width: 33%; margin: 30px">
+                                <input type="submit" value="쇼핑 계속하기">
+                            </div>
+
+
+
+
+
+
+                        </div>
 
                     </div>
                     <table >
