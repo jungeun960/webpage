@@ -213,7 +213,64 @@
 <div id="fouc">
 
     <!-- Header -->
-    <div id="headers"></div>
+    <header id="header" class="skel-layers-fixed">
+        <h1><a href="main.html">CHOIshop</a></h1>
+
+        <nav id="nav">
+            <ul>
+                <!--            <li><a href="main.html">Home</a></li>-->
+                <!--            <li><a href="notice.html">NOTICE </a></li>-->
+                <!--            <li><a href="q_and_a.html">Q&A </a></li>-->
+                <!--            <li><a href="basket.html">장바구니 </a></li>-->
+                <!--            <li><a href="registrater.html">회원가입 &nbsp &nbsp</a></li>-->
+
+                <?php
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from board order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                session_start();
+
+                if(isset($_SESSION['id'])) {
+
+                    echo $_SESSION['id'];?>님 안녕하세요
+                    <li><a href="logout.php">&nbsp &nbsp &nbsp 로그아웃 </a></li>
+                    <li><a href="basket.html">장바구니 </a></li>
+                    <li><a href="main.html">Home</a></li>
+                    <!--                        <li><a href="registrater.html">회원가입 </a></li>-->
+                    <li><a href="notice.html">NOTICE </a></li>
+                    <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                    <!--                        <button onclick="location.href='./logout.php'">로그아웃</button>-->
+                    <?php
+                    if($_SESSION['id']=='admin') {
+                        ?>
+                        <li><a href="add.html">관리자 페이지 &nbsp &nbsp</a></li>
+                        <?php
+                    }
+                    ?>
+                    <br/>
+                    <?php
+                }
+                else {
+                    ?>
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="login.html">로그인</a></li>
+                    <li><a href="registrater.html">회원가입 </a></li>
+                    <!--                        <li><a href="basket.html">장바구니 </a></li>-->
+                    <li><a href="notice.html">NOTICE </a></li>
+                    <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                    <!--                        <button onclick="location.href='./login.php'">로그인</button>-->
+                    <br />
+
+                <?php   }
+                ?>
+
+
+
+            </ul>
+        </nav>
+    </header>
     <!--</header>-->
 
     <!-- Main -->
@@ -294,7 +351,8 @@
                         <div id="btn_group">
                             <button  onclick="location.href='./q_and_a.html'">목록으로</button>
                             <button  onclick="location.href='./notice_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
-                            <button  onclick="location.href='./notice_delete.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">삭제</button>
+                            <button  onclick="location.href='./qa_delete.php?number=<?=$number?>'">삭제</button>
+
                         </div>
                     </div>
 
@@ -343,7 +401,7 @@
                                         <div class="comment-date"><?php echo $rows1['date']?></div>
                                         <ul class="comment-actions">
                                             <li class="reply"><a href="">수정</a> </li>
-                                            <li class="reply"><a href="./qa_delete.php?idx=<?=$rows1['idx']?>&con_num=<?=$rows1['con_num']?>">삭제</a> </li>
+                                            <li class="reply"><a href="./qa_comment_delete.php?idx=<?=$rows1['idx']?>&con_num=<?=$rows1['con_num']?>">삭제</a> </li>
 
                                         </ul>
                                     </div>

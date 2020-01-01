@@ -1,0 +1,417 @@
+<!DOCTYPE HTML>
+<!--
+	Ion by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<html class="no-js">
+<head>
+    <style>
+        .js #fouc {display: none}
+        a:link {color : #57A0EE; text-decoration:none;}
+
+        /* Font */
+        @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+        /* Design */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #ecf9ff;
+        }
+
+        body {
+            color: #272727;
+            font-family: 'Quicksand', serif;
+            font-style: normal;
+            font-weight: 400;
+            letter-spacing: 0;
+            padding: 1rem;
+        }
+
+        .main{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        img {
+            height: auto;
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        .btn {
+            color: #ffffff;
+            padding: 0.8rem;
+            font-size: 14px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            font-weight: 400;
+            display: block;
+            width: 100%;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cards_item {
+            display: flex;
+            padding: 1rem;
+        }
+
+        @media (min-width: 40rem) {
+            .cards_item {
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 56rem) {
+            .cards_item {
+                width: 33.3333%;
+            }
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.25rem;
+            box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card_content {
+            padding: 1rem;
+            background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+        }
+
+        .card_title {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+            margin: 0px;
+        }
+
+        .card_text {
+            color: #ffffff;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+        .made_by{
+            font-weight: 400;
+            font-size: 13px;
+            margin-top: 35px;
+            text-align: center;
+        }
+
+    </style>
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+            $("#menu").load("menu.html");
+
+        });
+    </script>
+
+    <title>CHOIshop</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
+</head>
+<body id="top">
+<div id="fouc">
+
+    <!-- Header -->
+    <header id="header" class="skel-layers-fixed">
+        <h1><a href="main.html">CHOIshop</a></h1>
+
+        <nav id="nav">
+            <ul>
+                <!--            <li><a href="main.html">Home</a></li>-->
+                <!--            <li><a href="notice.html">NOTICE </a></li>-->
+                <!--            <li><a href="q_and_a.html">Q&A </a></li>-->
+                <!--            <li><a href="basket.html">장바구니 </a></li>-->
+                <!--            <li><a href="registrater.html">회원가입 &nbsp &nbsp</a></li>-->
+
+                <?php
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from board order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                session_start();
+
+                if(isset($_SESSION['id'])) {
+
+                echo $_SESSION['id'];?>님 안녕하세요
+                <li><a href="logout.php">&nbsp &nbsp &nbsp 로그아웃 </a></li>
+                <li><a href="basket.html">장바구니 </a></li>
+                <li><a href="main.html">Home</a></li>
+                <!--                        <li><a href="registrater.html">회원가입 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./logout.php'">로그아웃</button>-->
+                <?php
+                if($_SESSION['id']=='admin') {
+                ?>
+                <li><a href="add.html">관리자 페이지 &nbsp &nbsp</a></li>
+                <?php
+                }
+                ?>
+                <br/>
+                <?php
+                }
+                else {
+        ?>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="login.html">로그인</a></li>
+                <li><a href="registrater.html">회원가입 </a></li>
+                <!--                        <li><a href="basket.html">장바구니 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./login.php'">로그인</button>-->
+                <br />
+
+                <?php   }
+        ?>
+
+
+
+            </ul>
+        </nav>
+    </header>
+    <!--</header>-->
+
+    <!-- Main -->
+    <section id="main" class="wrapper style1">
+        <header class="major">
+            <h2>CHOIshop</h2>
+            <p>www.CHOIshop.com</p>
+        </header>
+        <div class="container">
+            <div class="row">
+
+                <!-- menu -->
+                <div>
+                    <section>
+                        <h3>C A T E G O R Y</h3>
+                        <ul class="alt">
+                            <li><a href="new.html">NEW</a></li>
+                            <li><a href="best.html">BEST50</a></li>
+                            <li><a href="top.html">TOP</a></li>
+                            <li><a href="outer.html">OUTER</a></li>
+                            <li><a href="pants.html">PANTS</a></li>
+                            <li><a href="dress.html">DRESS</a></li>
+                            <li><a href="skirt.html">SKIRT</a></li>
+
+
+                        </ul>
+                        <!--        <ul class="actions">-->
+                        <!--            <li><a href="" class="button alt">Learn More</a></li>-->
+                        <!--        </ul>-->
+                    </section>
+                    <hr />
+                    <section>
+                        <h3>C O M M U N I T Y</h3>
+                        <ul class="alt">
+                            <li><a href="notice.html">NOTICE</a></li>
+                            <li><a href="q_and_a.html">Q&A</a></li>
+                            <li><a href="review.html">REVIEW</a></li>
+
+
+                        </ul>
+                    </section>
+                </div>
+                <!--</menu>-->
+
+
+                <div class="8u skel-cell-important">
+
+                    <div>
+                        <div class="title" style="float: left">
+                            <h3>주문 정보</h3>
+                        </div>
+                        <div style="float: right;" >
+                            <p><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/> 필수입력사항</p>
+                        </div>
+
+                        <div>
+                            <table border="1" summary="">
+                                <tbody class="address_form  ">
+                            <tr>
+                                <th scope="row">주문하시는 분 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></th>
+                                <td><input id="oname" name="oname" type="text"/></td>
+                            </tr>
+                            <tr class="">
+                                <th scope="row">주소 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></th>
+                                <td>
+                                    <input id="ozipcode1" name="ozipcode1" placeholder="" type="text"  />
+                                    <a href="#none" id="btn_search_ozipcode"><img src="/web/upload/cooke/su/s10.jpg" alt="우편번호"/></a><br/>
+                                    <input id="oaddr1" name="oaddr1" type="text"  placeholder="기본주소"/>
+                                    <input id="oaddr2" name="oaddr2" type="text"  placeholder="나머지주소"/>
+                                </td>
+                            </tr>
+                            <tr class="">
+                                <th scope="row">일반전화 <span class=""><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></span>
+                                </th>
+                                <td><input id="ophone1" name="ophone1" type="text" placeholder="'-'  빼고 입력해주세요"/></td>
+                            </tr>
+                            <tr class="">
+                                <th scope="row">휴대전화 <span><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></span>
+                                </th>
+                                <td><input id="ophone2" name="ophone2" type="text" placeholder="'-'  빼고 입력해주세요"/></td>
+                            </tr>
+                            </tbody>
+                                <tbody class="email"><tr>
+                                <th scope="row">이메일 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></th>
+                                <td>
+                                    <input id="oemail1" name="oemail1" type="text" placeholder="이메일을 입력해주세요" />
+                                    <ul>
+                                        <li style="list-style:none;">- 이메일을 통해 주문처리과정을 보내드립니다.</li>
+                                        <li style="list-style:none;">- 이메일 주소란에는 반드시 수신가능한 이메일주소를 입력해 주세요</li>
+                                    </ul>
+                                </td>
+                            </tr></tbody>
+                                <!-- 비회원 결제 --><tbody class="noMember ">
+                            <tr>
+                                <th scope="row">주문조회 비밀번호 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></th>
+                                <td><input id="order_password" name="order_password" size="7" maxlength="12"type="password"  /> (주문조회시 필요합니다. 4자에서 12자 영문 또는 숫자 대소문자 구분)</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">주문조회 비밀번호<br/>확인 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></th>
+                                <td><input id="order_password_confirm" name="order_password_confirm" size="7" maxlength="12" type="password"  /></td>
+                            </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 배송 정보 -->
+                    <div class="orderArea">
+                        <div class="title" style="float: left">
+                            <h3>배송 정보</h3>
+                        </div>
+                        <div style="float: right;" >
+                            <p><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/> 필수입력사항</p>
+                        </div>
+
+                        <div class="ec-base-table typeWrite">
+                            <table border="1" summary="">
+
+                                <tbody class=" ec-shop-deliverySimpleNomemberForm">
+
+                            </tbody>
+                                <!-- 국내 배송지 정보 --><tbody class="">
+                            <tr class="">
+                                <th scope="row">배송지 선택</th>
+                                <td>
+                                    <div class="address">
+                                        <input id="sameaddr0" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="T" type="radio"  /><label for="sameaddr0" >주문자 정보와 동일</label>
+                                        <input id="sameaddr1" name="sameaddr" fw-filter="" fw-label="1" fw-msg="" value="F" type="radio" checked="checked"  /><label for="sameaddr1" >새로운배송지</label>                            <a href="#none" id="btn_shipp_addr" class="displaynone"><img src="/web/upload/cooke/su/s11.jpg" alt="주소록 보기"/></a>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">받으시는 분 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></th>
+                                <td><input id="rname" name="rname" fw-filter="isFill" fw-label="수취자 성명" fw-msg="" class="inputTypeText" placeholder="" size="15" value="" type="text"  /></td>
+                            </tr>
+
+                            <tr class="">
+                                <th scope="row">주소 <img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></th>
+                                <td>
+                                    <input id="rzipcode1" name="rzipcode1" placeholder="" type="text"  />
+                                    <a href="#none" id="btn_search_rzipcode"><img src="/web/upload/cooke/su/s10.jpg" alt="우편번호"/></a><br/>
+                                    <input id="raddr1" name="raddr1" type="text"  placeholder="기본주소"/>
+                                    <input id="raddr2" name="raddr2" type="text"  placeholder="나머지주소"/>
+                                </td>
+                            </tr>
+
+                            <tr class="">
+                                <th scope="row">일반전화 <span class=""><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></span>
+                                </th>
+                                <td><input id="rphone1" name="rphone1" type="text" placeholder="'-'  빼고 입력해주세요"/></td>
+                            </tr>
+                            <tr class="">
+                                <th scope="row">휴대전화 <span><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></span>
+                                </th>
+                                <td><input id="rphone2" name="rphone2" type="text" placeholder="'-'  빼고 입력해주세요"/></td>
+                            </tr>
+                            </tbody>
+                                <!-- 국내 배송관련 정보 --><tbody class="delivery ">
+                            <tr class="">
+                                <th scope="row">배송메시지 <span class="displaynone"><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/order/ico_required.gif" alt="필수"/></span>
+                                </th>
+                                <td>
+                                    <textarea id="omessage" name="omessage" maxlength="255" cols="70" ></textarea>
+                                    <ul class="gIndent5">
+                                        <li style="list-style:none;">배송메시지란에는 배송시 참고할 사항이 있으면 적어주십시오.</li>
+                                        <li style="list-style:none;">게시글은 비밀글로 저장되며 비밀번호는 주문번호 뒷자리로 자동 저장됩니다.</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footers"></div>
+    <!--</footer>-->
+
+</div> <!-- /#fouc -->
+
+<script>
+    document.getElementById("fouc").style.display="block";
+</script>
+
+</body>
+</html>
