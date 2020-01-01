@@ -365,7 +365,7 @@
                         <div id="btn_group">
                             <button  onclick="location.href='./q_and_a.html'">목록으로</button>
                             <button  onclick="location.href='./notice_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
-                            <button  onclick="location.href='./notice_delete.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">삭제</button>
+                            <button  onclick="location.href='./product_delete.php?number=<?=$number?>'">삭제</button>
                         </div>
                     </div>
 
