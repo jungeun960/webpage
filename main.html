@@ -1,9 +1,5 @@
 <!DOCTYPE HTML>
-<!--
-	Ion by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
+
 <?php session_start(); ?>
 <html class="no-js">
 <head>
@@ -22,17 +18,6 @@
     <script>
 
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
-    </script>
-
-    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript">
-        $(document).ready( function() {
-
-            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
-            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
-            $("#menu").load("menu.html");
-
-        });
     </script>
 
     <!-- 팝업창 js -->
@@ -80,6 +65,17 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/style-xlarge.css" />
     </noscript>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+            $("#menu").load("menu.html");
+
+        });
+    </script>
 </head>
 <body id="top">
 
@@ -93,36 +89,6 @@
 ?>
 
 
-<!-- 팝업창 -->
-<div id="pop">
-    <div style="height:370px;">
-        <a href="/notice.html" ><img src="/uploads/<?php echo $rows['photo'];?>" align = "center" width="300" height="370" alt="" /></a>
-    </div>
-
-    <div style="float:left; text-align:right; height:100px">
-        <form name="pop_form">
-            <div style="font-size:12px; font-family:'돋움'; padding-left:50px;">
-                <input type="checkbox" id="chkbox" name="chkbox" value="checkbox">
-                <label for="chkbox" style="padding-bottom: 3px;"></label>
-                오늘 하루동안 보지 않기 &nbsp &nbsp
-                <a href="javascript:closePop();">CLOSE</a>
-
-
-            </div>
-        </form>
-    </div>
-
-    <script language="Javascript">
-        cookiedata = document.cookie;
-        if ( cookiedata.indexOf("maindiv=done") < 0 ){
-            document.all['pop'].style.visibility = "visible";
-        }
-        else {
-            document.all['pop'].style.visibility = "hidden";
-        }
-    </script>
-</div>
-<!--팝업창-->
 
 
 <div id="fouc">
@@ -187,7 +153,39 @@
     </header>
 <!--</header>-->
 
-<!-- Main -->
+    <!-- 팝업창 -->
+    <div id="pop">
+        <div style="height:370px;">
+            <a href="/notice.html" ><img src="/uploads/<?php echo $rows['photo'];?>" align = "center" width="300" height="370" alt="" /></a>
+        </div>
+
+        <div style="float:left; text-align:right; height:100px">
+            <form name="pop_form">
+                <div style="font-size:12px; font-family:'돋움'; padding-left:50px;">
+                    <input type="checkbox" id="chkbox" name="chkbox" value="checkbox">
+                    <label for="chkbox" style="padding-bottom: 3px;"></label>
+                    오늘 하루동안 보지 않기 &nbsp &nbsp
+                    <a href="javascript:closePop();">CLOSE</a>
+
+
+                </div>
+            </form>
+        </div>
+
+        <script language="Javascript">
+            cookiedata = document.cookie;
+            if ( cookiedata.indexOf("maindiv=done") < 0 ){
+                document.all['pop'].style.visibility = "visible";
+            }
+            else {
+                document.all['pop'].style.visibility = "hidden";
+            }
+        </script>
+    </div>
+    <!--팝업창-->
+
+
+    <!-- Main -->
 <section id="main" class="wrapper style1">
     <header class="major">
         <h2>CHOIshop</h2>

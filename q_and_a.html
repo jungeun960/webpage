@@ -274,7 +274,7 @@
                                 $result3 = $connect->query($query2);
                                 $rep_count = mysqli_num_rows($result3);
 
-                                $boardtime = $rows['date']; //$boardtime변수에 rows['date']값을 넣음
+                                $boardtime = $board['date']; //$boardtime변수에 rows['date']값을 넣음
                                 $timenow = date("Y-m-d"); //$timenow변수에 현재 시간 Y-M-D를 넣음
 
                                 if($boardtime==$timenow){
