@@ -78,6 +78,7 @@
     $id = $_POST['name'];                      //Writer
     $price = $_POST['price'];                        //Price
     $content = $_POST['content'];               //Content
+    $detail = $_POST['detail'];
 
     $name; // 저장한 파일 이름
 
@@ -87,8 +88,8 @@
         die("연결실패:" . mysqli_connect_error());
     }
 
-    $query = "insert into product_board (number, category, name, price, content, photo)
-                                    values(null,'$category', '$id','$price','$content', '$name')";
+    $query = "insert into product_board (number, category, name, price, content, photo, detail)
+                                    values(null,'$category', '$id','$price','$content', '$name','$detail')";
 
     //    var_export($query);
 

@@ -284,7 +284,7 @@
                 $conn = mysqli_connect("localhost","root","sql","data2019");
                 $number = $_GET['number'];
 
-                $query = "select category, name, price, content, photo from product_board where number =$number";
+                $query = "select category, name, price, content, photo, detail from product_board where number =$number";
                 $result = $conn->query($query);
                 $rows = mysqli_fetch_assoc($result);
                 ?>
@@ -360,6 +360,11 @@
                     <table >
                     </table>
 
+
+                    <div>
+
+                        <?php echo $rows['detail']?>
+                    </div>
                     <!-- MODIFY & DELETE -->
                     <div class="view_btn">
                         <div id="btn_group">

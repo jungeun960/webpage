@@ -1,7 +1,7 @@
 <?php
 // 이미지가 업로드될 폴더의 전체 경로입니다.
 // // 여기서는 구현을 간단히 하기 위해서 웹 루트 안에 업로드합니다.
-$uploadfullPath = "/uploads";
+$uploadfullPath = "./uploads/";
 
 // 이미지가 웹에서 보여질때 사용되어질 기본 URL입니다.
 // // 웹루트 부터의 절대 URL을 입력합니다.
@@ -24,6 +24,7 @@ $url = '' ;
 // 에러가 발생하면 메세지를 보여줍니다.
 $message = '';
 
+
 // CKEditor에서 이미지 업로드는 파일 키값으로 upload를 사용합니다.
 if (isset($_FILES['upload'])) {
     $name = $_FILES['upload']['name'];
@@ -39,6 +40,6 @@ if (isset($_FILES['upload'])) {
 
 // 이미지 업로드는 iframe을 사용해서 처리되므로 parent 와 통신하기 위해서
 // // 자바스크립트를 사용합니다.
-echo "{\"filename\" : \"$CKEditor\", \"uploaded\" : 1, \"url\":\"$url\"}";
-//echo "<script type='text/javascript'>; window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
+//echo "{\"filename\" : \"$name\", \"uploaded\" : 1, \"url\":\"$url\"}";
+echo "<script type='text/javascript'>; window.parent.CKEDITOR.tools.callFunction($funcNum, '$url', '$message')</script>";
 ?>

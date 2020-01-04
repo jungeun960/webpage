@@ -218,6 +218,18 @@
 
                                         </tr>
 
+                                        <tr>
+                                            <td> 상세내용 &nbsp &nbsp</td>
+                                            <td><textarea name=detail></textarea>
+                                                <script src="./ckeditor/ckeditor.js"></script>
+
+                                                <script>
+                                                    CKEDITOR.replace('detail');
+                                                </script>
+                                            </td>
+
+                                        </tr>
+
 
                                     </table>
 
