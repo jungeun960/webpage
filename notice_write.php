@@ -113,7 +113,8 @@
                     <li><a href="registrater.html">회원가입 </a></li>
                     <!--                        <li><a href="basket.html">장바구니 </a></li>-->
                     <li><a href="notice.html">NOTICE </a></li>
-                    <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                    <li><a href="q_and_a.html">Q&A </a></li>
+                    <li><a href=# onclick="window.open('http://192.168.56.101:52273/','name','resizable=no, width=500, height=600, left=100px,top=80px');return false">채팅 &nbsp &nbsp &nbsp &nbsp</a></li>
                     <!--                        <button onclick="location.href='./login.php'">로그인</button>-->
                     <br />
 
