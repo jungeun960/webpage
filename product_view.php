@@ -285,7 +285,7 @@
                 $conn = mysqli_connect("localhost","root","sql","data2019");
                 $number = $_GET['number'];
 
-                $query = "select category, name, price, content, photo, detail from product_board where number =$number";
+                $query = "select category, name, price, content, photo, detail, number from product_board where number =$number";
                 $result = $conn->query($query);
                 $rows = mysqli_fetch_assoc($result);
                 ?>
@@ -325,11 +325,21 @@
 
                         <br>
 
-                        <div id="pop_bt" style="float: left; width: 33%; margin: 15px">
-                            <input type = "button" value="CART" width="300" id = "basket">
-                        </div>
+<!--                        장바구니 추가-->
+                        <form method="post" action="cart_add.php">
+                            <div style=" width: 100px; margin: 15px">
+                                <input type = "submit" value="CART" width="300" id = "basket">
+                            </div>
 
-                        <div style="float: left; width: 33%; margin: 15px">
+                            <input type="hidden" name="pro_num" value="<?php echo $rows['number']?>">
+                            <input type="hidden" name="pro_name" value="<?php echo $rows['name']?>">
+                            <input type="hidden" name="pro_pic" value="<?php echo $rows['photo']; ?>">
+                            <input type="hidden" name="pro_price" value="<?php echo $rows['price']?>">
+
+                        </form>
+
+
+                        <div style="width:100px; margin: 15px">
                         <input type = "button" value="BUY" width="300">
                         </div>
 
@@ -349,11 +359,6 @@
                             <div id="close" style="float: left; width: 33%; margin: 30px">
                                 <input type="submit" value="쇼핑 계속하기">
                             </div>
-
-
-
-
-
 
                         </div>
 
