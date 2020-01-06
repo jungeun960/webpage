@@ -4,10 +4,12 @@
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
+<?php session_start();?>
 <html class="no-js">
 <head>
     <style>
         .js #fouc {display: none}
+        a:link {color : #57A0EE; text-decoration:none;}
     </style>
     <script>
         (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
@@ -140,6 +142,15 @@
                 </div>
                 <!--</menu>-->
 
+                <?php
+                $user_name = $_SESSION['id'];
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from cart where user_name = '$user_name' order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                ?>
+
                 <h2> 장바구니 </h2>
                 <div class="8u skel-cell-important">
                     <div>
@@ -150,23 +161,35 @@
                                 <th width="200">INFO</th>
                                 <th width="120">PRICE</th>
                                 <th width="50">QTY</th>
-                                <th width="100">TOTAL</th>
+<!--                                <th width="100">TOTAL</th>-->
                                 <th width="100">BUTTON</th>
 
                             </tr>
                             </thead>
 
                             <tbody>
-                            <tr>
+                            <?php
+                while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
+                        if($total%2==0){
+        ?>                      <tr class = "even">
+                                <?php   }
+                        else{
+        ?>                      <tr>
+                                <?php } ?>
                                 <td width="120" style="vertical-align: middle">
-                                        <div><img src="images/image1.PNG" width="80px" height="80px" /></div>
+                                    <div><img src="/uploads/<?php echo $rows['pro_pic'];?>" width="80px" height="80px" /></div>
                                 </td>
-                                <td width="200" style="vertical-align: middle">피어 루즈핏 브이니트</td>
-                                <td width="120" style="vertical-align: middle">30,500원</td>
-                                <td width="50" style="vertical-align: middle">1</td>
-                                <td width="100" style="vertical-align: middle">30,500원</td>
+                                <td width="200" style="vertical-align: middle">
+                                    <a href = "product_view.php?number=<?php echo $rows['pro_num']?>">
+                                        <?php echo $rows['pro_name']?></a></td>
+                                <td width="120" style="vertical-align: middle"><?php echo $rows['pro_price']?></td>
+                                <td width="50" style="vertical-align: middle"><?php echo $rows['count']?></td>
                                 <td width="100" style="vertical-align: middle">삭제하기</td>
                             </tr>
+                            <?php
+                $total--;
+                }
+        ?>
                             </tbody>
 
                         </table>
