@@ -184,7 +184,12 @@
                                         <?php echo $rows['pro_name']?></a></td>
                                 <td width="120" style="vertical-align: middle"><?php echo $rows['pro_price']?></td>
                                 <td width="50" style="vertical-align: middle"><?php echo $rows['count']?></td>
-                                <td width="100" style="vertical-align: middle">삭제하기</td>
+
+                                <td width="100" style="vertical-align: middle">
+                                    <?php $number = $rows['number']?>
+<!--                                    <button  onclick="location.href="cart_delete.php?number=<?php echo $rows['number']?>">삭제하기</button>-->
+                                    <button  onclick="location.href='./cart_delete.php?number=<?=$number?>'">삭제하기</button>
+                                </td>
                             </tr>
                             <?php
                 $total--;
