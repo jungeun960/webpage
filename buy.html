@@ -151,8 +151,11 @@
 
                 ?>
 
-                <h2> 장바구니 </h2>
+                <h2> 결제하기 </h2>
                 <div class="8u skel-cell-important">
+                    <br>
+
+<!--                    결제 목록-->
                     <div>
                         <table>
                             <thead>
@@ -160,9 +163,8 @@
                                 <th width="120">IMAGE</th>
                                 <th width="170">INFO</th>
                                 <th width="100">PRICE</th>
-                                <th width="100">QTY</th>
+                                <th width="70">QTY</th>
                                 <th width="100">TOTAL</th>
-                                <th width="100">BUTTON</th>
 
                             </tr>
                             </thead>
@@ -186,24 +188,8 @@
                                     <a href = "product_view.php?number=<?php echo $rows['pro_num']?>">
                                         <?php echo $rows['pro_name']?></a></td>
                                 <td width="100" style="vertical-align: middle"><?php echo $rows['pro_price']?>원</td>
-                                <td width="100" style="vertical-align: middle">
-                                    <form method = "post" action = "cart_modify.php">
-                                        <div style="float: left;">
-                                            <input type="text" name="count" style="width: 50px; vertical-align: middle" value="<?php echo $rows['count']?>">
-                                            <input type="hidden" name="number" value="<?php echo $rows['number']?>">
-                                        </div>
-                                        <div style="float: left; margin-top: 10px; margin-left: 5px">
-                                            <button  type="submit">변경</button>
-                                        </div>
-                                    </form>
-                                </td>
+                                <td width="70" style="vertical-align: middle"><?php echo $rows['count']?></td>
                                 <td width="100" style="vertical-align: middle"><?php echo $subtotal?>원</td>
-                                <td width="100" style="vertical-align: middle">
-                                    <?php $number = $rows['number']?>
-<!--                                    <button  onclick="location.href="cart_delete.php?number=<?php echo $rows['number']?>">삭제하기</button>-->
-                                    <button  onclick="location.href='./cart_delete.php?number=<?=$number?>'">삭제하기</button>
-                                </td>
-
                             </tr>
                             <?php
 
@@ -212,19 +198,135 @@
                 }
         ?>
                             </tbody>
-
                         </table>
                     </div>
 
-                    <div style="float:right; font-weight: bold; font-size: medium">
-                        * 30,000원 이하로 구매 시 배송비가 부가됩니다.
+
+                    <?php
+                                    $send =0;
+                                    if($totalprice < 30000){
+                                        $send = 2500;}
+
+                                    if($totalprice == 0){
+                                        $send = 0;}
+
+                                     $all = $totalprice+$send
+                    ?>
+
+                    <div style="float:right;">
+                        상품구매금액 <?php echo $totalprice ?>원 + 배송비 <?php echo $send ?>원 = 합계 : <?php echo $all ?>원
                     </div>
                     <br><br>
-                    <div style="float:right; font-weight: bold">
-                        <button  onclick="location.href='./cart_all_delete.php'">장바구니 비우기</button>
+                    <div style="float:left; font-weight: bold; font-size: small">
+                        * 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.
                     </div>
+                    <br>
+                    <div style="float:right; font-weight: bold">
+                        <button  onclick="location.href='/basket.html'">이전 페이지</button>
+                    </div>
+<!--                    결제 목록-->
+
+                    <br><br><br><br>
+                    <div style="font-weight: bold">주문 정보 </div><br>
+                    <form method = "post" action = ".php">
+                        <table  style="padding-top:50px" align = center border=0 cellpadding=2 >
+                            <tr>
+                                <td bgcolor=white>
+                                    <table class = "table2">
+                                        <tr><td style="width: 150px">주문하시는 분</td>
+                                            <td><input type = text name =name size=40></td> </tr>
+
+                                        <tr>
+                                            <td>주소</td>
+                                            <td><table class="test" align=center>
+                                                <input type="text" style="width: 200px; float: left; margin-right: 10px" name=ad1 id="sample6_postcode" placeholder="우편번호">
+                                                <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+                                                <input type="text" name=ad2 id="sample6_address" placeholder="주소"><br>
+                                                <input type="text" name=ad3 id="sample6_detailAddress" placeholder="상세주소">
+                                                <input type="text" name=ad4 id="sample6_extraAddress" placeholder="참고항목">
+
+                                                <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+                                                <script>
+                                                    function sample6_execDaumPostcode() {
+                                                        new daum.Postcode({
+                                                            oncomplete: function(data) {
+                                                                // 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+                                                                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
+                                                                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+                                                                var addr = ''; // 주소 변수
+                                                                var extraAddr = ''; // 참고항목 변수
+
+                                                                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                                                                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                                                                    addr = data.roadAddress;
+                                                                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                                                                    addr = data.jibunAddress;
+                                                                }
+
+                                                                // 사용자가 선택한 주소가 도로명 타입일때 참고항목을 조합한다.
+                                                                if(data.userSelectedType === 'R'){
+                                                                    // 법정동명이 있을 경우 추가한다. (법정리는 제외)
+                                                                    // 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+                                                                    if(data.bname !== '' && /[동|로|가]$/g.test(data.bname)){
+                                                                        extraAddr += data.bname;
+                                                                    }
+                                                                    // 건물명이 있고, 공동주택일 경우 추가한다.
+                                                                    if(data.buildingName !== '' && data.apartment === 'Y'){
+                                                                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                                                                    }
+                                                                    // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+                                                                    if(extraAddr !== ''){
+                                                                        extraAddr = ' (' + extraAddr + ')';
+                                                                    }
+                                                                    // 조합된 참고항목을 해당 필드에 넣는다.
+                                                                    document.getElementById("sample6_extraAddress").value = extraAddr;
+
+                                                                } else {
+                                                                    document.getElementById("sample6_extraAddress").value = '';
+                                                                }
+
+                                                                // 우편번호와 주소 정보를 해당 필드에 넣는다.
+                                                                document.getElementById('sample6_postcode').value = data.zonecode;
+                                                                document.getElementById("sample6_address").value = addr;
+                                                                // 커서를 상세주소 필드로 이동한다.
+                                                                document.getElementById("sample6_detailAddress").focus();
+                                                            }
+                                                        }).open();
+                                                    }
+                                                </script>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr><td>일반 전화</td>
+                                            <td><input type = text name =phone1 size=60 placeholder="'-'  빼고 입력해주세요"> </td> </tr>
+
+                                        <tr><td>휴대 전화</td>
+                                            <td><input type = text name =phone2 size=60 placeholder="'-'  빼고 입력해주세요"></td> </tr>
+
+                                        <tr><td>이메일</td>
+                                            <td><input type = email name =email size=60></td> </tr>
+
+                                        <tr><td>배송 메세지</td>
+                                            <td><input type = email name =message size=60>
+                                            <li style="list-style:none;">- 배송메시지란에는 배송시 참고할 사항이 있으면 적어주십시오.</li>
+
+                                            </td>
+                                        </tr>
+                                    </table>
+
+
+<!--                                        <input type = "submit" value="작성">-->
+
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+
                     <br><br><br>
 
+                    <div style="font-weight: bold">결제 예정 금액</div><br>
                     <div>
                         <table>
                             <thead>
@@ -240,16 +342,6 @@
                                 <td width="33%" style="vertical-align: middle; font-weight: bold">
                                     <?php echo $totalprice ?>원
                                 </td>
-                                <?php
-                                    $send =0;
-                                    if($totalprice < 30000){
-                                        $send = 2500;}
-
-                                    if($totalprice == 0){
-                                        $send = 0;}
-
-                                     $all = $totalprice+$send
-                                        ?>
                                 <td width="33%" style="vertical-align: middle; font-weight: bold">
                                     + <?php echo $send ?>원
                                 </td>
@@ -262,7 +354,7 @@
                         </table>
                     </div>
 
-                    <input style="float: right" type = "button" value="구매하기" onclick="location.href='./buy.html'">
+                    <input style="float: right" type = "button" value="결제하기" onclick="location.href='./buy.html'">
 
                 </div>
 
@@ -275,11 +367,11 @@
     <div id="footers"></div>
     <!--</footer>-->
 
-    </div> <!-- /#fouc -->
+</div> <!-- /#fouc -->
 
-    <script>
-        document.getElementById("fouc").style.display="block";
-    </script>
+<script>
+    document.getElementById("fouc").style.display="block";
+</script>
 
 </body>
 </html>
