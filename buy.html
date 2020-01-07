@@ -40,6 +40,10 @@
         <link rel="stylesheet" href="css/style.css" />
         <link rel="stylesheet" href="css/style-xlarge.css" />
     </noscript>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
 </head>
 <body id="top">
 <div id="fouc">
@@ -228,7 +232,7 @@
 
                     <br><br><br><br>
                     <div style="font-weight: bold">주문 정보 </div><br>
-                    <form method = "post" action = ".php">
+                    <form method = "post" action = "buy2.php">
                         <table  style="padding-top:50px" align = center border=0 cellpadding=2 >
                             <tr>
                                 <td bgcolor=white>
@@ -316,45 +320,77 @@
                                         </tr>
                                     </table>
 
-
 <!--                                        <input type = "submit" value="작성">-->
 
                                 </td>
                             </tr>
                         </table>
+
+
+                        <br><br><br>
+
+                        <div style="font-weight: bold">결제 예정 금액</div><br>
+                        <div>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th width="33%">총 상품금액</th>
+                                    <th width="33%">총 배송비</th>
+                                    <th width="33%">결제예정금액</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td width="33%" style="vertical-align: middle; font-weight: bold">
+                                        <?php echo $totalprice ?>원
+                                    </td>
+                                    <td width="33%" style="vertical-align: middle; font-weight: bold">
+                                        + <?php echo $send ?>원
+                                    </td>
+                                    <td width="33%" style="vertical-align: middle; font-weight: bold">
+                                        =  <?php echo $all ?>원
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                        <input type="hidden" name="price" value="<php= $all ?>원">
+
+                        <input  style="float: right" type = "button" value="결제하기" onclick="button1_click();">
                     </form>
 
-                    <br><br><br>
+                        <script>
+                            function button1_click() {
+                                var IMP = window.IMP; // 생략가능
+                                IMP.init('imp23881648'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
 
-                    <div style="font-weight: bold">결제 예정 금액</div><br>
-                    <div>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th width="33%">총 상품금액</th>
-                                <th width="33%">총 배송비</th>
-                                <th width="33%">결제예정금액</th>
-                            </tr>
-                            </thead>
+                                IMP.request_pay({
+                                    pg : 'inicis',
+                                    pay_method : 'card',
+                                    merchant_uid : 'merchant_' + new Date().getTime(),
+                                    name : 'CHOIshop ',
+                                    amount : '<?= $all ?>',
+                                    buyer_email : '',
+                                    buyer_name : '구매자이름',
+                                    buyer_tel : '010-1234-5678',
+                                    buyer_addr : '서울특별시 강남구 삼성동',
+                                    buyer_postcode : '123-456'
+                                }, function(rsp) {
+                                    if ( rsp.success ) {
+                                        var msg = '결제가 완료되었습니다.';
+                                    } else {
+                                        var msg = '결제에 실패하였습니다.';
+                                    }
 
-                            <tbody>
-                            <tr>
-                                <td width="33%" style="vertical-align: middle; font-weight: bold">
-                                    <?php echo $totalprice ?>원
-                                </td>
-                                <td width="33%" style="vertical-align: middle; font-weight: bold">
-                                    + <?php echo $send ?>원
-                                </td>
-                                <td width="33%" style="vertical-align: middle; font-weight: bold">
-                                    =  <?php echo $all ?>원
-                                </td>
+                                    alert(msg);
+                                });
+                            }
+                        </script>
 
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <input style="float: right" type = "button" value="결제하기" onclick="location.href='./buy.html'">
 
                 </div>
 
