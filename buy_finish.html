@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<!--
+	Ion by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<?php session_start();?>
+<html class="no-js">
+<head>
+    <style>
+        .js #fouc {display: none}
+        a:link {color : #57A0EE; text-decoration:none;}
+    </style>
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+            $("#menu").load("menu.html");
+
+        });
+    </script>
+
+    <title>CHOIshop</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
+    <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
+
+</head>
+<body id="top">
+<div id="fouc">
+
+    <!-- Header -->
+    <header id="header" class="skel-layers-fixed">
+        <h1><a href="main.html">CHOIshop</a></h1>
+
+        <nav id="nav">
+            <ul>
+                <?php
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from board order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                session_start();
+
+                if(isset($_SESSION['id'])) {
+
+                echo $_SESSION['id'];?>님 안녕하세요
+                <li><a href="logout.php">&nbsp &nbsp &nbsp 로그아웃 </a></li>
+                <li><a href="basket.html">장바구니 </a></li>
+                <li><a href="main.html">Home</a></li>
+                <!--                        <li><a href="registrater.html">회원가입 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A </a></li>
+                <li><a href=# onclick="window.open('http://192.168.56.101:52273/','name','resizable=no, width=500, height=600, left=100px,top=80px');return false">채팅 &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./logout.php'">로그아웃</button>-->
+                <?php
+                if($_SESSION['id']=='admin') {
+                ?>
+                <li><a href="add.html">관리자 페이지 &nbsp &nbsp</a></li>
+                <?php
+                }
+                ?>
+                <br/>
+                <?php
+                }
+                else {
+        ?>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="login.html">로그인</a></li>
+                <li><a href="registrater.html">회원가입 </a></li>
+                <!--                        <li><a href="basket.html">장바구니 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./login.php'">로그인</button>-->
+                <br />
+
+                <?php   }
+        ?>
+
+
+
+            </ul>
+        </nav>
+    </header>
+    <!--</header>-->
+
+    <!-- Main -->
+    <section id="main" class="wrapper style1">
+        <header class="major">
+            <h2>CHOIshop</h2>
+            <p>www.CHOIshop.com</p>
+        </header>
+        <div class="container">
+            <div class="row">
+
+                <!-- menu -->
+                <div>
+                    <section>
+                        <h3>C A T E G O R Y</h3>
+                        <ul class="alt">
+                            <li><a href="new.html">NEW</a></li>
+                            <li><a href="best.html">BEST50</a></li>
+                            <li><a href="top.html">TOP</a></li>
+                            <li><a href="outer.html">OUTER</a></li>
+                            <li><a href="pants.html">PANTS</a></li>
+                            <li><a href="dress.html">DRESS</a></li>
+                            <li><a href="skirt.html">SKIRT</a></li>
+
+
+                        </ul>
+                        <!--        <ul class="actions">-->
+                        <!--            <li><a href="" class="button alt">Learn More</a></li>-->
+                        <!--        </ul>-->
+                    </section>
+                    <hr />
+                    <section>
+                        <h3>C O M M U N I T Y</h3>
+                        <ul class="alt">
+                            <li><a href="notice.html">NOTICE</a></li>
+                            <li><a href="q_and_a.html">Q&A</a></li>
+                            <li><a href="review.html">REVIEW</a></li>
+
+
+                        </ul>
+                    </section>
+                </div>
+                <!--</menu>-->
+
+                <?php
+                $user_name = $_SESSION['id'];
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from cart where user_name = '$user_name' order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                ?>
+
+                <h2> 주문/배송 상세정보 </h2>
+                <div class="8u skel-cell-important">
+                    <br>
+
+                    <!--                    결제 목록-->
+                    <div style="font-weight: bold">상품 정보</div><br>
+                    <div>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th width="120">IMAGE</th>
+                                <th width="170">INFO</th>
+                                <th width="100">PRICE</th>
+                                <th width="70">QTY</th>
+                                <th width="100">TOTAL</th>
+
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <?php
+                            $totalprice=0;
+                while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
+                        if($total%2==0){
+        ?>                      <tr class = "even">
+                                <?php   }
+                        else{
+        ?>                      <tr>
+                                <?php }
+                                $subtotal = $rows['pro_price']*$rows['count'];
+        ?>
+                                <td width="120" style="vertical-align: middle">
+                                    <div><img src="/uploads/<?php echo $rows['pro_pic'];?>" width="80px" height="80px" /></div>
+                                </td>
+                                <td width="150" style="vertical-align: middle"><?php echo $rows['pro_name']?></td>
+                                <td width="100" style="vertical-align: middle"><?php echo $rows['pro_price']?>원</td>
+                                <td width="70" style="vertical-align: middle"><?php echo $rows['count']?></td>
+                                <td width="100" style="vertical-align: middle"><?php echo $subtotal?>원</td>
+                            </tr>
+                            <?php
+
+                $totalprice += $subtotal;
+                $total--;
+                }
+        ?>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <?php
+                                    $send =0;
+                                    if($totalprice < 30000){
+                                        $send = 2500;}
+
+                                    if($totalprice == 0){
+                                        $send = 0;}
+
+                                     $all = $totalprice+$send
+                    ?>
+
+
+                    <!--                    결제 목록-->
+
+                    <br><br><br><br>
+                    <div style="font-weight: bold">배송상태 </div><br>
+
+                    <div style="font-weight: bold">배송지 정보 </div><br>
+
+
+                        <br><br><br>
+
+                        <div style="font-weight: bold">결제금액정보</div><br>
+                        <div>
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th width="33%">총 상품금액</th>
+                                    <th width="33%">총 배송비</th>
+                                    <th width="33%">총 결제금액</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+                                <tr>
+                                    <td width="33%" style="vertical-align: middle; font-weight: bold">
+                                        <?php echo $totalprice ?>원
+                                    </td>
+                                    <td width="33%" style="vertical-align: middle; font-weight: bold">
+                                        + <?php echo $send ?>원
+                                    </td>
+                                    <td width="33%" style="vertical-align: middle; font-weight: bold">
+                                        =  <?php echo $all ?>원
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footers"></div>
+    <!--</footer>-->
+
+</div> <!-- /#fouc -->
+
+<script>
+    document.getElementById("fouc").style.display="block";
+</script>
+
+</body>
+</html>
