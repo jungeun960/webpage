@@ -212,7 +212,7 @@
                     </div>
                     <br><br>
                     <div style="float:right; font-weight: bold">
-                        <button  onclick="location.href='./'">장바구니 비우기</button>
+                        <button  onclick="location.href='./cart_all_delete.php'">장바구니 비우기</button>
                     </div>
                     <br><br><br>
 
@@ -235,6 +235,9 @@
                                     $send =0;
                                     if($totalprice < 30000){
                                         $send = 2500;}
+
+                                    if($totalprice == 0){
+                                        $send = 0;}
 
                                      $all = $totalprice+$send
                                         ?>
