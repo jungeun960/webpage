@@ -1,66 +1,51 @@
 <?php
-session_start();
-header("Content-Type: text/html;charset=UTF-8");
-$conn = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+    session_start();
+    header("Content-Type: text/html;charset=UTF-8");
+    $conn = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
 
-$id = $_SESSION['id'];                      //Writer
-$date = date('Y-m-d');
+    $id = $_SESSION['id'];                      //Writer
+    $date = date('Y-m-d H:i:s');            //Date
 
+    if(!$conn){
+        die("연결실패:" . mysqli_connect_error());
+    }
 
-$URL = 'buy_finish.html';                   //return URL
+    // 장바구니에 있는거 구매내역으로 이동
+    $sql = "select * from cart where user_name = '$id'";
+    $result = mysqli_query($conn,  $sql);
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $count = $row["count"];
+            $price = $row["pro_price"];
+            $pro_name = $row["pro_name"];
+            $pro_pic = $row["pro_pic"];
 
-$query ="select * from cart where user_name = '$id' order by number desc";
-$result = $connect->query($query);
-$total = mysqli_num_rows($result);
+            $query1 = "insert into buy (number, id, count, pro_name, pro_pic, pro_price) 
+                            values(null,'$id','$count','$pro_name','$pro_pic','$price')";
+            $conn->query($query1);
+        }
+    }else{
+        echo "테이블에 데이터가 없습니다.";
+    }
 
+    // 결제 정보 생성
+    $query2 = "insert into payment_list (number, id, delivery, date) 
+                            values(null,'$id','주문완료','$date')";
+    $conn->query($query2);
 
-var_export($total);
+    // 장바구니 비우기
+    $query3 = "delete from cart where user_name = '$id'";
+    $conn->query($query3);
 
-//echo $query;
-//$price=0;
-//
-//while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
-//    $subtotal = $rows['pro_price']*$rows['count'];
-//    $price += $subtotal;
-//}
-//echo $price;
-//
-//$send =0;
-//if($price < 30000){
-//    $send = 2500;}
-//
-//if($price == 0){
-//    $send = 0;}
-//
-//echo $send;
+    ?>
+    <script>
+        location.replace("./buy_finish.html");
+    </script>
+    <?php
 
-
-
-if(!$conn){
-    die("연결실패:" . mysqli_connect_error());
-}
-
-//$query1 = "insert into payment_list (number, id, price1, price2, delivery, date)
-//                            values(null,'$id',0,0, '주문완료','$date')";
-//
-////    var_export($query);
-//
-//
-//$result1 = mysqli_query($conn, $query1);
-echo mysqli_error($conn);
-
-//    var_export($result);
-
-if($result1){
+    mysqli_close($conn); // 디비 접속 닫기
     ?>
 
-    <?php
-}
-else{
-    echo "FAIL";
-}
 
-mysqli_close($conn);
-?>
 
 
