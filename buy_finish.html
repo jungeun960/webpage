@@ -149,9 +149,16 @@
                 <?php
                 $user_name = $_SESSION['id'];
                 $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
-                $query ="select * from cart where user_name = '$user_name' order by number desc";
+                $query ="select * from buy where id = '$user_name' order by number desc";
                 $result = $connect->query($query);
                 $total = mysqli_num_rows($result);
+
+                ?>
+
+                <?php
+                $delivery ="select delivery from payment_list where id = '$user_name'";
+                $de_result = $connect->query($delivery);
+                $state = mysqli_fetch_assoc($de_result);
 
                 ?>
 
@@ -170,7 +177,7 @@
                                 <th width="100">PRICE</th>
                                 <th width="70">QTY</th>
                                 <th width="100">TOTAL</th>
-
+                                <th width="100" style="font-weight: bold">배송상태</th>
                             </tr>
                             </thead>
 
@@ -193,6 +200,7 @@
                                 <td width="100" style="vertical-align: middle"><?php echo $rows['pro_price']?>원</td>
                                 <td width="70" style="vertical-align: middle"><?php echo $rows['count']?></td>
                                 <td width="100" style="vertical-align: middle"><?php echo $subtotal?>원</td>
+                                <td width="100" style="vertical-align: middle; font-weight: bold"><?php echo $state['delivery']?></td>
                             </tr>
                             <?php
 
@@ -216,13 +224,13 @@
                                      $all = $totalprice+$send
                     ?>
 
+                    <div style="float:right;">
+                        상품구매금액 <?php echo $totalprice ?>원 + 배송비 <?php echo $send ?>원 = 합계 : <?php echo $all ?>원
+                    </div>
 
                     <!--                    결제 목록-->
 
-                    <br><br><br><br>
-                    <div style="font-weight: bold">배송상태 </div><br>
-
-
+                    <br><br>
                     <?php
 
                         $query2 ="select * from order_info where id = '$user_name'";
@@ -266,7 +274,7 @@
                     </table>
 
 
-                        <br><br><br>
+                        <br><br>
 
                         <div style="font-weight: bold">결제금액정보</div><br>
                         <div>
