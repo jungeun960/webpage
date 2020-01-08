@@ -159,7 +159,7 @@
                 <div class="8u skel-cell-important">
                     <br>
 
-<!--                    결제 목록-->
+                    <!--                    결제 목록-->
                     <div>
                         <table>
                             <thead>
@@ -226,7 +226,7 @@
                     <div style="float:right; font-weight: bold">
                         <button  onclick="location.href='/basket.html'">이전 페이지</button>
                     </div>
-<!--                    결제 목록-->
+                    <!--                    결제 목록-->
 
                     <br><br><br><br>
                     <div style="font-weight: bold">주문 정보 </div><br>
@@ -297,7 +297,7 @@
                                                         }).open();
                                                     }
                                                 </script>
-                                                </table>
+                                            </table>
                                             </td>
                                         </tr>
 
@@ -311,14 +311,14 @@
                                             <td><input type = email name =email size=60></td> </tr>
 
                                         <tr><td>배송 메세지</td>
-                                            <td><input type = email name =message size=60>
-                                            <li style="list-style:none;">- 배송메시지란에는 배송시 참고할 사항이 있으면 적어주십시오.</li>
+                                            <td><input type = text name =message size=60>
+                                                <li style="list-style:none;">- 배송메시지란에는 배송시 참고할 사항이 있으면 적어주십시오.</li>
 
                                             </td>
                                         </tr>
                                     </table>
 
-<!--                                        <input type = "submit" value="작성">-->
+                                    <!--                                        <input type = "submit" value="작성">-->
 
                                 </td>
                             </tr>
@@ -358,37 +358,9 @@
 
                         <input type="hidden" name="price" value="<php= $all ?>원">
 
-                        <input  style="float: right" type = "button" value="결제하기" onclick="button1_click();">
+                        <input  style="float: right" type = "submit" value="다음">
                     </form>
 
-                        <script>
-                            function button1_click() {
-                                var IMP = window.IMP; // 생략가능
-                                IMP.init('imp23881648'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
-
-                                IMP.request_pay({
-                                    pg : 'inicis',
-                                    pay_method : 'card',
-                                    merchant_uid : 'merchant_' + new Date().getTime(),
-                                    name : 'CHOIshop ',
-                                    amount : '<?= $all ?>',
-                                    buyer_email : '',
-                                    buyer_name : '',
-                                    buyer_tel : '',
-                                    buyer_addr : '',
-                                    buyer_postcode : ''
-                                }, function(rsp) {
-                                    if ( rsp.success ) {
-                                        var msg = '결제가 완료되었습니다.';
-                                    } else {
-                                        var msg = '결제에 실패하였습니다.';
-                                    }
-
-                                    alert(msg);
-                                    location.replace("./buy_finish.html");
-                                });
-                            }
-                        </script>
 
 
                 </div>

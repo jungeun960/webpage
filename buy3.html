@@ -155,12 +155,11 @@
 
                 ?>
 
-                <h2> 주문/배송 상세정보 </h2>
+                <h2> 결제하기 </h2>
                 <div class="8u skel-cell-important">
                     <br>
 
-                    <!--                    결제 목록-->
-                    <div style="font-weight: bold">상품 정보</div><br>
+<!--                    결제 목록-->
                     <div>
                         <table>
                             <thead>
@@ -216,21 +215,30 @@
                                      $all = $totalprice+$send
                     ?>
 
-
-                    <!--                    결제 목록-->
-
-                    <br><br><br><br>
-                    <div style="font-weight: bold">배송상태 </div><br>
-
+                    <div style="float:right;">
+                        상품구매금액 <?php echo $totalprice ?>원 + 배송비 <?php echo $send ?>원 = 합계 : <?php echo $all ?>원
+                    </div>
+                    <br><br>
+                    <div style="float:left; font-weight: bold; font-size: small">
+                        * 상품의 옵션 및 수량 변경은 상품상세 또는 장바구니에서 가능합니다.
+                    </div>
+                    <br>
+                    <div style="float:right; font-weight: bold">
+                        <button  onclick="location.href='/basket.html'">이전 페이지</button>
+                    </div>
+<!--                    결제 목록-->
 
                     <?php
-
+                        $user_name = $_SESSION['id'];
+                        $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
                         $query2 ="select * from order_info where id = '$user_name'";
                         $result2 = $connect->query($query2);
                         $rows2 = mysqli_fetch_assoc($result2)
                     ?>
 
-                    <div style="font-weight: bold">배송지 정보 </div><br>
+                    <br><br><br><br>
+                    <div style="font-weight: bold">주문 정보 </div><br>
+
                     <table  style="padding-top:50px" align = center border=0 cellpadding=2 >
                         <tr>
                             <td bgcolor=white>
@@ -265,17 +273,16 @@
                         </tr>
                     </table>
 
-
                         <br><br><br>
 
-                        <div style="font-weight: bold">결제금액정보</div><br>
+                        <div style="font-weight: bold">결제 예정 금액</div><br>
                         <div>
                             <table>
                                 <thead>
                                 <tr>
                                     <th width="33%">총 상품금액</th>
                                     <th width="33%">총 배송비</th>
-                                    <th width="33%">총 결제금액</th>
+                                    <th width="33%">결제예정금액</th>
                                 </tr>
                                 </thead>
 
@@ -295,6 +302,50 @@
                                 </tbody>
                             </table>
                         </div>
+
+
+                        <input type="hidden" name="price" value="<php= $all ?>원">
+
+                        <input  style="float: right" type = "button" value="결제하기" onclick="button1_click();">
+
+
+                        <script>
+                            $email = $rows2['email'];
+                            $name = $rows2['name'];
+                            $phone2 = $rows2['phone2'];
+                            $ad1 = $rows2['ad1'];
+                            $ad2 = $rows2['ad2'] + $rows2['ad3'] + $rows2['ad4'];
+
+                            function button1_click() {
+                                var IMP = window.IMP; // 생략가능
+                                IMP.init('imp23881648'); // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
+
+                                IMP.request_pay({
+                                    pg : 'inicis',
+                                    pay_method : 'card',
+                                    merchant_uid : 'merchant_' + new Date().getTime(),
+                                    name : 'CHOIshop ',
+                                    amount : '<?= $all ?>',
+                                    buyer_email : '<?= $email ?>',
+                                    buyer_name : '<?= $name ?>',
+                                    buyer_tel : '<?= $phone2 ?>',
+                                    buyer_addr : '<?= $ad2 ?>',
+                                    buyer_postcode : '<?= $ad1 ?>'
+                                }, function(rsp) {
+                                    if ( rsp.success ) {
+                                        var msg = '결제가 완료되었습니다.';
+                                        location.replace("./buy_finish.html");
+                                    } else {
+                                        var msg = '결제에 실패하였습니다.';
+                                        location.replace("./basket.html");
+                                    }
+
+                                    alert(msg);
+
+                                });
+                            }
+                        </script>
+
 
                 </div>
 
