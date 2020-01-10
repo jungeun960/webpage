@@ -285,6 +285,9 @@
                 $conn = mysqli_connect("localhost","root","sql","data2019");
                 $number = $_GET['number'];
 
+                $hit = "update product_board set hit=hit+1 where number=$number";
+                $conn->query($hit);
+
                 $query = "select category, name, price, content, photo, detail, number from product_board where number =$number";
                 $result = $conn->query($query);
                 $rows = mysqli_fetch_assoc($result);
@@ -374,7 +377,7 @@
                     <!-- MODIFY & DELETE -->
                     <div class="view_btn">
                         <div id="btn_group">
-                            <button  onclick="location.href='./q_and_a.html'">목록으로</button>
+                            <button  onclick="location.href='./add.html'">목록으로</button>
                             <button  onclick="location.href='./notice_modify.php?number=<?=$number?>&id=<?=$_SESSION['userid']?>'">수정</button>
                             <button  onclick="location.href='./product_delete.php?number=<?=$number?>'">삭제</button>
                         </div>
