@@ -277,7 +277,7 @@
                         $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
                         $query ="select * from  product_board order by hit desc LIMIT 20";
                         $result = $connect->query($query);
-                $total = mysqli_num_rows($result);
+                        $total = mysqli_num_rows($result);
 
                 ?>
                 <div class="8u skel-cell-important">
