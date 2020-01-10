@@ -1,10 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<!--
+	Ion by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+-->
+<?php session_start(); ?>
+<html class="no-js">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <style>
+        .js #fouc {display: none}
+        a:link {color : #57A0EE; text-decoration:none;}
+
+        /* Font */
+        @import url('https://fonts.googleapis.com/css?family=Quicksand:400,700');
+
+        /* Design */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            background-color: #ecf9ff;
+        }
+
+        body {
+            color: #272727;
+            font-family: 'Quicksand', serif;
+            font-style: normal;
+            font-weight: 400;
+            letter-spacing: 0;
+            padding: 1rem;
+        }
+
+        .main{
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        img {
+            height: auto;
+            max-width: 100%;
+            vertical-align: middle;
+        }
+
+        .btn {
+            color: #ffffff;
+            padding: 0.8rem;
+            font-size: 14px;
+            text-transform: uppercase;
+            border-radius: 4px;
+            font-weight: 400;
+            display: block;
+            width: 100%;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.12);
+        }
+
+        .cards {
+            display: flex;
+            flex-wrap: wrap;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .cards_item {
+            display: flex;
+            padding: 1rem;
+        }
+
+        @media (min-width: 40rem) {
+            .cards_item {
+                width: 50%;
+            }
+        }
+
+        @media (min-width: 56rem) {
+            .cards_item {
+                width: 33.3333%;
+            }
+        }
+
+        .card {
+            background-color: white;
+            border-radius: 0.25rem;
+            box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .card_content {
+            padding: 1rem;
+            background: linear-gradient(to bottom left, #EF8D9C 40%, #FFC39E 100%);
+        }
+
+        .card_title {
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: capitalize;
+            margin: 0px;
+        }
+
+        .card_text {
+            color: #ffffff;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin-bottom: 1.25rem;
+            font-weight: 400;
+        }
+        .made_by{
+            font-weight: 400;
+            font-size: 13px;
+            margin-top: 35px;
+            text-align: center;
+        }
+
+    </style>
+    <script>
+        (function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)
+    </script>
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function() {
+
+            $("#headers").load("headers.html");  // 원하는 파일 경로를 삽입하면 된다
+            $("#footers").load("footer.html");  // 추가 인클루드를 원할 경우 이런식으로 추가하면 된다
+            $("#menu").load("menu.html");
+
+        });
+    </script>
+
+    <title>CHOIshop</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-layers.min.js"></script>
+    <script src="js/init.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="css/skel.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/style-xlarge.css" />
+    </noscript>
 </head>
-<body>
+<body id="top">
+<div id="fouc">
+
+    <!-- Header -->
+    <header id="header" class="skel-layers-fixed">
+        <h1><a href="main.html">CHOIshop</a></h1>
+
+        <nav id="nav">
+            <ul>
+                <!--            <li><a href="main.html">Home</a></li>-->
+                <!--            <li><a href="notice.html">NOTICE </a></li>-->
+                <!--            <li><a href="q_and_a.html">Q&A </a></li>-->
+                <!--            <li><a href="basket.html">장바구니 </a></li>-->
+                <!--            <li><a href="registrater.html">회원가입 &nbsp &nbsp</a></li>-->
+
+                <?php
+                $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                $query ="select * from board order by number desc";
+                $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                session_start();
+
+                if(isset($_SESSION['id'])) {
+
+                echo $_SESSION['id'];?>님 안녕하세요
+                <li><a href="logout.php">&nbsp &nbsp &nbsp 로그아웃 </a></li>
+                <li><a href="basket.html">장바구니 </a></li>
+                <li><a href="main.html">Home</a></li>
+                <!--                        <li><a href="registrater.html">회원가입 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A </a></li>
+                <li><a href=# onclick="window.open('http://192.168.56.101:52273/','name','resizable=no, width=500, height=600, left=100px,top=80px');return false">채팅 &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./logout.php'">로그아웃</button>-->
+                <?php
+                if($_SESSION['id']=='admin') {
+                ?>
+                <li><a href="add.html">관리자 페이지 &nbsp &nbsp</a></li>
+                <?php
+                }
+                ?>
+                <br/>
+                <?php
+                }
+                else {
+        ?>
+                <li><a href="main.html">Home</a></li>
+                <li><a href="login.html">로그인</a></li>
+                <li><a href="registrater.html">회원가입 </a></li>
+                <!--                        <li><a href="basket.html">장바구니 </a></li>-->
+                <li><a href="notice.html">NOTICE </a></li>
+                <li><a href="q_and_a.html">Q&A &nbsp &nbsp &nbsp &nbsp</a></li>
+                <!--                        <button onclick="location.href='./login.php'">로그인</button>-->
+                <br />
+
+                <?php   }
+        ?>
+
+
+
+            </ul>
+        </nav>
+    </header>
+    <!--</header>-->
+
+    <!-- Main -->
+    <section id="main" class="wrapper style1">
+        <header class="major">
+            <h2>CHOIshop</h2>
+            <p>www.CHOIshop.com</p>
+        </header>
+        <div class="container">
+            <div class="row">
+
+                <!-- menu -->
+                <div>
+                    <section>
+                        <h3>C A T E G O R Y</h3>
+                        <ul class="alt">
+                            <li><a href="new.html">NEW</a></li>
+                            <li><a href="best.html">BEST50</a></li>
+                            <li><a href="top.html">TOP</a></li>
+                            <li><a href="outer.html">OUTER</a></li>
+                            <li><a href="pants.html">PANTS</a></li>
+                            <li><a href="dress.html">DRESS</a></li>
+                            <li><a href="skirt.html">SKIRT</a></li>
+
+
+                        </ul>
+                        <!--        <ul class="actions">-->
+                        <!--            <li><a href="" class="button alt">Learn More</a></li>-->
+                        <!--        </ul>-->
+                    </section>
+                    <hr />
+                    <section>
+                        <h3>C O M M U N I T Y</h3>
+                        <ul class="alt">
+                            <li><a href="notice.html">NOTICE</a></li>
+                            <li><a href="q_and_a.html">Q&A</a></li>
+                            <li><a href="review.html">REVIEW</a></li>
+
+
+                        </ul>
+                    </section>
+                </div>
+                <!--</menu>-->
+
+
+
+                <h2>  N E W 20 </h2>
+
+                <?php
+                        $connect = mysqli_connect("localhost","root","sql","data2019")or die ("connect fail");
+                        $query ="select * from  product_board order by number desc LIMIT 20";
+                        $result = $connect->query($query);
+                $total = mysqli_num_rows($result);
+
+                ?>
+                <div class="8u skel-cell-important">
+
+                    <div class="main">
+                        <ul class="cards">
+
+                            <?php
+                                            while($rows = mysqli_fetch_assoc($result)){ //DB에 저장된 데이터 수 (열 기준)
+                                                    if($total%2==0){
+                                    ?>
+                            <?php   }
+                                                    else{
+                                    ?>
+                            <?php } ?>
+                            <li class="cards_item">
+                                <div class="card">
+                                    <div class="card_image">
+                                        <img src="/uploads/<?php echo $rows['photo']; ?>" align = "center" alt="" width="490" height="490"/>
+                                    </div>
+                                    <div class="card_content">
+                                        <h2 class="card_title"><?php echo $rows['name']?></h2>
+                                        <a href = "product_view.php?number=<?php echo $rows['number']?>">
+                                            <p class="card_text"><?php echo $rows['price']?>원</p>
+                                            <button class="btn card_btn">Read More</button>
+                                            <a href = "product_view.php?number=<?php echo $rows['number']?>">
+
+                                    </div>
+
+                                </div>
+                            </li>
+                            <?php
+                                            $total--;
+                                            }
+                                    ?>
+
+                        </ul>
+                    </div>
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <div id="footers"></div>
+    <!--</footer>-->
+
+</div> <!-- /#fouc -->
+
+<script>
+    document.getElementById("fouc").style.display="block";
+</script>
 
 </body>
 </html>
